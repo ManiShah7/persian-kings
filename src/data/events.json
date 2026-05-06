@@ -1,0 +1,362 @@
+[
+  {
+    "id": "zoroastrianism-establishment",
+    "year": -600,
+    "yearApprox": true,
+    "category": "culture-religion",
+    "title": "Zoroastrianism Established",
+    "titleFa": "تأسیس زرتشتی‌گری",
+    "fact": "Ancient Persian religion with monotheistic elements, founded by Zoroaster, shapes Iranian philosophy for millennia."
+  },
+  {
+    "id": "cyrus-cylinder",
+    "year": -539,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Cyrus Cylinder Issued",
+    "titleFa": "استوانه کوروش",
+    "fact": "Cyrus declares freedom of religion and repatriation rights for exiled peoples after capturing Babylon."
+  },
+  {
+    "id": "persepolis-constructed",
+    "year": -515,
+    "yearApprox": false,
+    "category": "culture-religion",
+    "title": "Persepolis Constructed",
+    "titleFa": "تخت جمشید ساخته می‌شود",
+    "fact": "Construction of Persepolis begins as ceremonial capital, becoming symbol of Persian imperial power."
+  },
+  {
+    "id": "battle-of-marathon",
+    "year": -490,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Battle of Marathon",
+    "titleFa": "نبرد مارتون",
+    "fact": "Greeks defeat Persians at Marathon; first major setback for Achaemenid expansion in Europe."
+  },
+  {
+    "id": "battle-of-thermopylae",
+    "year": -480,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Battle of Thermopylae",
+    "titleFa": "نبرد تراموپیلا",
+    "fact": "Spartan defense at Thermopylae becomes legendary stand against Persian invasion despite ultimate defeat."
+  },
+  {
+    "id": "battle-of-salamis",
+    "year": -480,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Battle of Salamis",
+    "titleFa": "نبرد سالامین",
+    "fact": "Greek naval victory at Salamis breaks Persian dominance in Mediterranean, halting European expansion."
+  },
+  {
+    "id": "battle-of-gaugamela",
+    "year": -331,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Battle of Gaugamela",
+    "titleFa": "نبرد گوگمل",
+    "fact": "Alexander defeats Darius III decisively, ending Achaemenid Empire and beginning Hellenistic period."
+  },
+  {
+    "id": "jundishapur-academy",
+    "year": 550,
+    "yearApprox": true,
+    "category": "science",
+    "title": "Jundishapur Academy of Medicine",
+    "titleFa": "آکادمی پزشکی جندی‌شاپور",
+    "fact": "Jundishapur Academy becomes major center of learning in Sasanian Persia, preserving and advancing medical knowledge."
+  },
+  {
+    "id": "battle-of-qadisiyyah",
+    "year": 636,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Battle of al-Qadisiyyah",
+    "titleFa": "نبرد قادسیه",
+    "fact": "Arab victory over Sasanians begins Islamic conquest of Persia, fundamentally transforming Persian civilization."
+  },
+  {
+    "id": "jabir-ibn-hayyan",
+    "year": 800,
+    "yearApprox": true,
+    "category": "science",
+    "title": "Jabir ibn Hayyan's Alchemy",
+    "titleFa": "جابر بن حیان و کیمیاگری",
+    "fact": "Jabir ibn Hayyan advances alchemical and chemical knowledge, establishing foundations of experimental chemistry."
+  },
+  {
+    "id": "al-khwarizmi-mathematics",
+    "year": 820,
+    "yearApprox": false,
+    "category": "science",
+    "title": "Al-Khwarizmi's Mathematical Works",
+    "titleFa": "آثار ریاضی خوارزمی",
+    "fact": "Al-Khwarizmi's algebra treatise introduces algorithmic methods; his name gives rise to word 'algorithm'."
+  },
+  {
+    "id": "banu-musa-mathematics",
+    "year": 850,
+    "yearApprox": true,
+    "category": "science",
+    "title": "Banu Musa Brothers' Mathematical Works",
+    "titleFa": "آثار ریاضی برادران بنو موسی",
+    "fact": "Banu Musa brothers advance mathematics and mechanics; their translations preserve Greek mathematical knowledge."
+  },
+  {
+    "id": "al-biruni-astronomy",
+    "year": 1000,
+    "yearApprox": true,
+    "category": "science",
+    "title": "Al-Biruni's Astronomical and Mathematical Works",
+    "titleFa": "آثار ستاره‌شناسی و ریاضی البیرونی",
+    "fact": "Al-Biruni measures Earth's circumference and advances astronomy; among greatest medieval scientists."
+  },
+  {
+    "id": "shahnameh-ferdowsi",
+    "year": 1010,
+    "yearApprox": false,
+    "category": "culture-religion",
+    "title": "Ferdowsi Completes Shahnameh",
+    "titleFa": "فردوسی شاهنامه را تکمیل می‌کند",
+    "fact": "Ferdowsi completes Shahnameh, epic poem preserving Persian mythology and cultural identity after Arab conquest."
+  },
+  {
+    "id": "avicenna-canon",
+    "year": 1025,
+    "yearApprox": false,
+    "category": "science",
+    "title": "Avicenna's Canon of Medicine",
+    "titleFa": "قانون ابن سینا در پزشکی",
+    "fact": "Avicenna completes Canon of Medicine, authoritative medical text used in Europe for centuries."
+  },
+  {
+    "id": "nizamiyah-school-founded",
+    "year": 1067,
+    "yearApprox": false,
+    "category": "science",
+    "title": "Nizamiyah School Founded",
+    "titleFa": "بنیاد مدرسه نظامیه",
+    "fact": "Nizam al-Mulk establishes Nizamiyah, influential Islamic school advancing education and theological thought."
+  },
+  {
+    "id": "jalali-calendar",
+    "year": 1079,
+    "yearApprox": false,
+    "category": "science",
+    "title": "Jalali Calendar Introduced",
+    "titleFa": "تقویم جلالی",
+    "fact": "Omar Khayyam and team design the Jalali solar calendar under Malik Shah I, more accurate than the Gregorian calendar."
+  },
+  {
+    "id": "omar-khayyam-mathematics",
+    "year": 1100,
+    "yearApprox": true,
+    "category": "science",
+    "title": "Omar Khayyam's Mathematical Works",
+    "titleFa": "آثار ریاضی عمر خیام",
+    "fact": "Omar Khayyam advances algebra and geometry; his poetry and mathematics represent Persian intellectual achievements."
+  },
+  {
+    "id": "nizami-khamsa",
+    "year": 1190,
+    "yearApprox": false,
+    "category": "culture-religion",
+    "title": "Nizami Completes Khamsa",
+    "titleFa": "نظامی خمسه را تکمیل می‌کند",
+    "fact": "Nizami writes Khamsa (Five Poems), foundational works of Persian literature and Islamic poetry."
+  },
+  {
+    "id": "mongol-invasions-begin",
+    "year": 1219,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Mongol Invasions Begin",
+    "titleFa": "آغاز تهاجمات مغول",
+    "fact": "Genghis Khan invades Khwarazmian Empire, beginning decades of Mongol conquest and devastation in Persia."
+  },
+  {
+    "id": "saadi-golestan",
+    "year": 1257,
+    "yearApprox": false,
+    "category": "culture-religion",
+    "title": "Saadi Writes Golestan",
+    "titleFa": "سعدی گلستان را می‌نویسد",
+    "fact": "Saadi completes Golestan, influential Persian prose-poetry work of wisdom and moral instruction."
+  },
+  {
+    "id": "sack-of-baghdad",
+    "year": 1258,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Sack of Baghdad",
+    "titleFa": "تاخت بغداد",
+    "fact": "Hulagu Khan sacks Baghdad, ending Abbasid Caliphate and shifting Islamic power eastward toward Persia."
+  },
+  {
+    "id": "maragheh-observatory",
+    "year": 1259,
+    "yearApprox": false,
+    "category": "science",
+    "title": "Maragheh Observatory Founded",
+    "titleFa": "بنیاد رصدخانه مراغه",
+    "fact": "Nasir al-Din al-Tusi establishes Maragheh Observatory, advancing astronomy and mathematical science."
+  },
+  {
+    "id": "rumi-masnavi",
+    "year": 1273,
+    "yearApprox": false,
+    "category": "culture-religion",
+    "title": "Rumi Completes Masnavi",
+    "titleFa": "مولوی مثنوی را تکمیل می‌کند",
+    "fact": "Rumi completes Masnavi, spiritual masterpiece of Persian literature influencing mysticism worldwide."
+  },
+  {
+    "id": "hafez-divan",
+    "year": 1370,
+    "yearApprox": true,
+    "category": "culture-religion",
+    "title": "Hafez's Poetry Gains Recognition",
+    "titleFa": "شاعری حافظ شهرت می‌یابد",
+    "fact": "Hafez's Divan becomes celebrated as masterpiece of Persian lyric poetry and mystical wisdom."
+  },
+  {
+    "id": "timur-invasions",
+    "year": 1380,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Timur's Invasions Begin",
+    "titleFa": "آغاز تهاجمات تیمور",
+    "fact": "Timur invades Persia, causing massive destruction but later enabling Timurid cultural renaissance."
+  },
+  {
+    "id": "persian-miniature-painting",
+    "year": 1550,
+    "yearApprox": true,
+    "category": "culture-religion",
+    "title": "Persian Miniature Painting Zenith",
+    "titleFa": "اوج نقاشی مینیاتور فارسی",
+    "fact": "Persian miniature painting reaches artistic peak during Safavid period, blending Persian, Islamic, and Turkic styles."
+  },
+  {
+    "id": "twelver-shia-state-religion",
+    "year": 1501,
+    "yearApprox": false,
+    "category": "culture-religion",
+    "title": "Twelver Shia Adopted as State Religion",
+    "titleFa": "اعتماد شیعه دوازده‌امامی به‌عنوان دین رسمی",
+    "fact": "Safavid Empire adopts Twelver Shia Islam as state religion, defining Persian religious identity permanently."
+  },
+  {
+    "id": "battle-of-chaldiran",
+    "year": 1514,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Battle of Chaldiran",
+    "titleFa": "نبرد جالدران",
+    "fact": "Selim I defeats Ismail I at Chaldiran, establishing Ottoman-Persian rivalry that shapes region for centuries."
+  },
+  {
+    "id": "nader-shah-delhi",
+    "year": 1739,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Nader Shah's Invasion of Delhi",
+    "titleFa": "حمله نادر شاه به دهلی",
+    "fact": "Nader Shah invades Delhi, restoring Persian military might and wealth, establishing himself as major regional power."
+  },
+  {
+    "id": "treaty-gulistan",
+    "year": 1813,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Treaty of Gulistan",
+    "titleFa": "معاهده گلستان",
+    "fact": "Persia cedes territory to Russia, marking beginning of Russian imperial encroachment on Persian sovereignty."
+  },
+  {
+    "id": "treaty-turkmenchay",
+    "year": 1828,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Treaty of Turkmenchay",
+    "titleFa": "معاهده ترکمنچای",
+    "fact": "Second Persian loss to Russia further reduces territory and establishes Russian economic privileges in Persia."
+  },
+  {
+    "id": "tobacco-protest",
+    "year": 1892,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Tobacco Protest",
+    "titleFa": "اعتراض به تنباکو",
+    "fact": "Persian clerics and merchants protest tobacco concession to British; first mass nationalist movement in Persia."
+  },
+  {
+    "id": "constitutional-revolution",
+    "year": 1906,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Constitutional Revolution",
+    "titleFa": "انقلاب مشروطه",
+    "fact": "Constitutional Revolution establishes parliament and limits monarchy; modernizing Persia's political system."
+  },
+  {
+    "id": "oil-discovery-persia",
+    "year": 1908,
+    "yearApprox": false,
+    "category": "science",
+    "title": "Oil Discovery in Persia",
+    "titleFa": "کشف نفت در ایران",
+    "fact": "Oil discovered in southwestern Persia, transforming economy and bringing Anglo-Persian Oil Company involvement."
+  },
+  {
+    "id": "reza-khan-coup",
+    "year": 1921,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Reza Khan Takes Power",
+    "titleFa": "رضا خان قدرت را به دست می‌گیرد",
+    "fact": "Reza Khan seizes power in coup, beginning process of military modernization and centralization."
+  },
+  {
+    "id": "coup-1953-mossadegh",
+    "year": 1953,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "1953 Coup Against Mossadegh",
+    "titleFa": "کودتای ۱۹۵۳ علیه مصدق",
+    "fact": "CIA and British intelligence orchestrate coup against nationalist PM Mossadegh, installing Mohammad Reza Shah."
+  },
+  {
+    "id": "white-revolution",
+    "year": 1963,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "White Revolution",
+    "titleFa": "انقلاب سفید",
+    "fact": "Mohammad Reza Shah launches White Revolution of economic and social reforms, deepening westernization."
+  },
+  {
+    "id": "persepolis-2500-celebration",
+    "year": 1971,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "2500 Year Celebration of the Persian Empire",
+    "titleFa": "جشن‌های ۲۵۰۰ ساله شاهنشاهی ایران",
+    "fact": "Mohammad Reza Shah hosts lavish ceremony at Persepolis marking 2500 years of Persian monarchy; later seen as catalyst for revolution."
+  },
+  {
+    "id": "islamic-revolution",
+    "year": 1979,
+    "yearApprox": false,
+    "category": "politics-wars",
+    "title": "Islamic Revolution",
+    "titleFa": "انقلاب اسلامی",
+    "fact": "Islamic Revolution overthrows Pahlavi monarchy, establishing Islamic Republic under Ayatollah Khomeini's leadership."
+  }
+]

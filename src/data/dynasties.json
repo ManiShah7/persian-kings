@@ -1,0 +1,611 @@
+[
+  {
+    "id": "median",
+    "name": "Median Empire",
+    "nameFa": "ماد",
+    "startYear": -728,
+    "endYear": -550,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "row": 0,
+    "color": "#8B4513",
+    "capital": {
+      "name": "Ecbatana",
+      "lat": 34.7994,
+      "lng": 48.4743
+    },
+    "foreignRule": false,
+    "facts": [
+      "Ancient Persian kingdom that resisted Assyrian dominance and influenced early Persian civilization.",
+      "Coalition against Assyria demonstrated regional power before Achaemenid ascendancy."
+    ]
+  },
+  {
+    "id": "achaemenid",
+    "name": "Achaemenid Empire",
+    "nameFa": "هخامنشیان",
+    "startYear": -550,
+    "endYear": -330,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#B8860B",
+    "capital": {
+      "name": "Persepolis",
+      "lat": 29.9348,
+      "lng": 52.8928
+    },
+    "foreignRule": false,
+    "facts": [
+      "Cyrus the Great founded world's largest ancient empire; established religious tolerance and administrative genius.",
+      "Two centuries of dominance; Darius I organized vast territories into satrapies and standardized currency."
+    ]
+  },
+  {
+    "id": "macedonian",
+    "name": "Macedonian Rule",
+    "nameFa": "مقدونیان",
+    "startYear": -330,
+    "endYear": -323,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#A0522D",
+    "capital": {
+      "name": "Babylon",
+      "lat": 32.5426,
+      "lng": 44.4218
+    },
+    "foreignRule": true,
+    "facts": [
+      "Alexander the Great's brief conquest marked transition from Persian to Hellenistic rule.",
+      "Only thirteen years of control; death in Babylon fragmented his empire into successor kingdoms."
+    ]
+  },
+  {
+    "id": "seleucid",
+    "name": "Seleucid Empire",
+    "nameFa": "سلوکیان",
+    "startYear": -312,
+    "endYear": -150,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#D2691E",
+    "capital": {
+      "name": "Seleucia on the Tigris",
+      "lat": 33.0,
+      "lng": 44.4
+    },
+    "foreignRule": true,
+    "facts": [
+      "Seleucus I seized eastern territories after Alexander's death; hellenized Persian civilization.",
+      "Controlled Persia for over 150 years; progressively weakened by Parthian rise in east."
+    ]
+  },
+  {
+    "id": "parthian",
+    "name": "Parthian Empire",
+    "nameFa": "اشکانیان",
+    "startYear": -247,
+    "endYear": 224,
+    "startYearApprox": true,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#CD853F",
+    "capital": {
+      "name": "Ctesiphon",
+      "lat": 33.1391,
+      "lng": 44.6325
+    },
+    "foreignRule": false,
+    "facts": [
+      "Fierce rivals to Rome; controlled crucial Silk Road trade routes for nearly 500 years.",
+      "Developed sophisticated diplomacy and cavalry tactics; revived Persian cultural nationalism."
+    ]
+  },
+  {
+    "id": "sasanian",
+    "name": "Sasanian Empire",
+    "nameFa": "ساسانیان",
+    "startYear": 224,
+    "endYear": 651,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#DC143C",
+    "capital": {
+      "name": "Ctesiphon",
+      "lat": 33.1391,
+      "lng": 44.6325
+    },
+    "foreignRule": false,
+    "facts": [
+      "Last pre-Islamic Persian empire; four centuries of Zoroastrian supremacy and administrative excellence.",
+      "Rivaled Rome and Byzantine Empire; created sophisticated bureaucracy that influenced Islamic state."
+    ]
+  },
+  {
+    "id": "umayyad",
+    "name": "Umayyad Caliphate",
+    "nameFa": "امویان",
+    "startYear": 661,
+    "endYear": 750,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#A9A9A9",
+    "capital": {
+      "name": "Damascus",
+      "lat": 33.3128,
+      "lng": 36.2764
+    },
+    "foreignRule": true,
+    "facts": [
+      "First Islamic caliphate; Arab conquest and rule transformed Persian language and identity.",
+      "Rapid expansion across three continents; Persia became core of Islamic world economically and culturally."
+    ]
+  },
+  {
+    "id": "abbasid",
+    "name": "Abbasid Caliphate",
+    "nameFa": "عباسیان",
+    "startYear": 750,
+    "endYear": 1258,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#808080",
+    "capital": {
+      "name": "Baghdad",
+      "lat": 33.3128,
+      "lng": 44.3615
+    },
+    "foreignRule": true,
+    "facts": [
+      "Five centuries as Islamic caliphate; elevated Persian culture and language within Arab empire.",
+      "Baghdad became intellectual center of world; Persians dominated administration and court life."
+    ]
+  },
+  {
+    "id": "bavandid",
+    "name": "Bavandid Dynasty",
+    "nameFa": "باوندیان",
+    "startYear": 651,
+    "endYear": 1349,
+    "startYearApprox": true,
+    "endYearApprox": false,
+    "row": 4,
+    "color": "#4B7280",
+    "capital": {
+      "name": "Sari",
+      "lat": 36.5633,
+      "lng": 53.0601
+    },
+    "foreignRule": false,
+    "facts": [
+      "Remarkably long-lived dynasty lasting nearly 700 years in Caspian region despite external pressures.",
+      "Maintained independence from Arab and later Turkish powers; preserved Persian traditions."
+    ]
+  },
+  {
+    "id": "tahirid",
+    "name": "Tahirid Dynasty",
+    "nameFa": "طاهریان",
+    "startYear": 821,
+    "endYear": 873,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#8B7355",
+    "capital": {
+      "name": "Nishapur",
+      "lat": 36.2133,
+      "lng": 58.7958
+    },
+    "foreignRule": false,
+    "facts": [
+      "Early autonomous Persian dynasty; achieved semi-independence from weakening Abbasid Caliphate.",
+      "Patronized Persian literature and learning; initiated cultural revival during Abbasid decline."
+    ]
+  },
+  {
+    "id": "samanid",
+    "name": "Samanid Empire",
+    "nameFa": "سامانیان",
+    "startYear": 819,
+    "endYear": 999,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 2,
+    "color": "#2F4F4F",
+    "capital": {
+      "name": "Bukhara",
+      "lat": 39.7751,
+      "lng": 64.4276
+    },
+    "foreignRule": false,
+    "facts": [
+      "Persian cultural renaissance; revived Persian language and literature as elite language of court.",
+      "Two centuries of prosperity and intellectual achievement; founders of Ferdowsi's Shahnameh patronage era."
+    ]
+  },
+  {
+    "id": "saffarid",
+    "name": "Saffarid Dynasty",
+    "nameFa": "صفاریان",
+    "startYear": 861,
+    "endYear": 1003,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 3,
+    "color": "#6B8E23",
+    "capital": {
+      "name": "Zaranj",
+      "lat": 30.9586,
+      "lng": 61.8607
+    },
+    "foreignRule": false,
+    "facts": [
+      "Military dynasty; Ya'qub al-Layth expanded rapidly through conquest and established regional power.",
+      "Challenged Abbasid authority in eastern Persia; promoted Persian culture over Arab."
+    ]
+  },
+  {
+    "id": "ziyarid",
+    "name": "Ziyarid Dynasty",
+    "nameFa": "زیاریان",
+    "startYear": 931,
+    "endYear": 1090,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#3D6B42",
+    "capital": {
+      "name": "Gorgan",
+      "lat": 36.8399,
+      "lng": 54.4616
+    },
+    "foreignRule": false,
+    "facts": [
+      "Caspian region dynasty; resisted major powers and maintained cultural independence for centuries.",
+      "Supported Persian letters and arts; built impressive fortifications against invaders."
+    ]
+  },
+  {
+    "id": "buyid",
+    "name": "Buyid Dynasty",
+    "nameFa": "آل بویه",
+    "startYear": 934,
+    "endYear": 1062,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 2,
+    "color": "#20B2AA",
+    "capital": {
+      "name": "Ray",
+      "lat": 35.6892,
+      "lng": 51.4233
+    },
+    "foreignRule": false,
+    "facts": [
+      "Shia dynasty; displaced Sunni authority in western Persia; patrons of sophisticated culture.",
+      "Peak period saw remarkable flowering of poetry, philosophy, and courtly refinement."
+    ]
+  },
+  {
+    "id": "ghaznavid",
+    "name": "Ghaznavid Empire",
+    "nameFa": "غزنویان",
+    "startYear": 977,
+    "endYear": 1186,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 3,
+    "color": "#4169E1",
+    "capital": {
+      "name": "Ghazni",
+      "lat": 33.5505,
+      "lng": 68.4236
+    },
+    "foreignRule": false,
+    "facts": [
+      "Mahmud of Ghazni built vast Islamic empire; conquered India and brought immense wealth.",
+      "Patronized arts and sciences; Ferdowsi completed Shahnameh under their rule."
+    ]
+  },
+  {
+    "id": "seljuk",
+    "name": "Seljuk Empire",
+    "nameFa": "سلجوقیان",
+    "startYear": 1037,
+    "endYear": 1194,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#1E90FF",
+    "capital": {
+      "name": "Isfahan",
+      "lat": 32.6546,
+      "lng": 51.668
+    },
+    "foreignRule": false,
+    "facts": [
+      "Turkish dynasty; consolidated Islamic rule over Persia; great patrons of architecture and learning.",
+      "Nizamiyah schools advanced education; Isfahan flourished as cultural center."
+    ]
+  },
+  {
+    "id": "khwarazmian",
+    "name": "Khwarazmian Empire",
+    "nameFa": "خوارزمشاهیان",
+    "startYear": 1077,
+    "endYear": 1231,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 2,
+    "color": "#5F9EA0",
+    "capital": {
+      "name": "Urgench",
+      "lat": 41.5585,
+      "lng": 60.6277
+    },
+    "foreignRule": false,
+    "facts": [
+      "Central Asian power; controlled trade routes and accumulated vast wealth and cultural resources.",
+      "Mongol invasion destroyed empire; al-Khwarizmi's mathematics spread through Islamic world."
+    ]
+  },
+  {
+    "id": "ilkhanate",
+    "name": "Ilkhanate",
+    "nameFa": "ایلخانان",
+    "startYear": 1256,
+    "endYear": 1335,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#228B22",
+    "capital": {
+      "name": "Maragheh",
+      "lat": 37.3949,
+      "lng": 46.2574
+    },
+    "foreignRule": true,
+    "facts": [
+      "Mongol dynasty that gradually adopted Persian culture and became Persianized.",
+      "Maragheh Observatory advanced astronomy; commissioned Persian historical texts and maintained court culture."
+    ]
+  },
+  {
+    "id": "muzaffarid",
+    "name": "Muzaffarid Dynasty",
+    "nameFa": "مظفریان",
+    "startYear": 1314,
+    "endYear": 1393,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#32CD32",
+    "capital": {
+      "name": "Yazd",
+      "lat": 31.8974,
+      "lng": 54.3569
+    },
+    "foreignRule": false,
+    "facts": [
+      "Fragmented but cultured dynasty; controlled multiple cities including Yazd and Kerman simultaneously.",
+      "Patrons of arts; commissioned beautiful calligraphy and miniature paintings despite political instability."
+    ]
+  },
+  {
+    "id": "jalayirid",
+    "name": "Jalayirid Dynasty",
+    "nameFa": "جلایریان",
+    "startYear": 1335,
+    "endYear": 1432,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 2,
+    "color": "#40E0D0",
+    "capital": {
+      "name": "Baghdad",
+      "lat": 33.3128,
+      "lng": 44.3615
+    },
+    "foreignRule": true,
+    "facts": [
+      "Mongol-descended dynasty; major patrons of Persian poetry, miniature art, and calligraphy.",
+      "Court of exceptional cultural refinement despite political decline."
+    ]
+  },
+  {
+    "id": "sarbadars",
+    "name": "Sarbadars",
+    "nameFa": "سربداران",
+    "startYear": 1337,
+    "endYear": 1376,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 3,
+    "color": "#9370DB",
+    "capital": {
+      "name": "Sabzevar",
+      "lat": 36.2133,
+      "lng": 57.6829
+    },
+    "foreignRule": false,
+    "facts": [
+      "Religious and social revolt movement against feudal lords; briefly controlled eastern Persia.",
+      "Attempted egalitarian rule; suppressed by Timur's invasion."
+    ]
+  },
+  {
+    "id": "timurid",
+    "name": "Timurid Empire",
+    "nameFa": "تیموریان",
+    "startYear": 1370,
+    "endYear": 1507,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#FFD700",
+    "capital": {
+      "name": "Samarkand",
+      "lat": 39.6549,
+      "lng": 66.976
+    },
+    "foreignRule": false,
+    "facts": [
+      "Timur's dynasty sparked greatest cultural renaissance of Islamic world; Samarkand became intellectual jewel.",
+      "Patronized mathematics, astronomy, literature, miniature painting; revived Persian as court language."
+    ]
+  },
+  {
+    "id": "kara-koyunlu",
+    "name": "Kara Koyunlu",
+    "nameFa": "قراقویونلو",
+    "startYear": 1375,
+    "endYear": 1468,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#8B0000",
+    "capital": {
+      "name": "Tabriz",
+      "lat": 38.08,
+      "lng": 46.2919
+    },
+    "foreignRule": false,
+    "facts": [
+      "Turkmen confederation; controlled western Persia for nearly a century.",
+      "Patrons of Timuri art and miniature painting; rivaled Aq Koyunlu for regional dominance."
+    ]
+  },
+  {
+    "id": "aq-koyunlu",
+    "name": "Aq Koyunlu",
+    "nameFa": "آق‌قویونلو",
+    "startYear": 1378,
+    "endYear": 1508,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 2,
+    "color": "#DAA520",
+    "capital": {
+      "name": "Tabriz",
+      "lat": 38.08,
+      "lng": 46.2919
+    },
+    "foreignRule": false,
+    "facts": [
+      "White Sheep Turkomen; competed with Kara Koyunlu for Persia; major art patrons.",
+      "Uzun Hasan challenged Ottoman power; court attracted scholars and artists."
+    ]
+  },
+  {
+    "id": "safavid",
+    "name": "Safavid Empire",
+    "nameFa": "صفویان",
+    "startYear": 1501,
+    "endYear": 1736,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#006400",
+    "capital": {
+      "name": "Isfahan",
+      "lat": 32.6546,
+      "lng": 51.668
+    },
+    "foreignRule": false,
+    "facts": [
+      "Established Twelver Shia Islam as state religion; restored Persian independence and cultural pride.",
+      "Abbas the Great made Persia major power; two centuries of artistic and literary flourishing."
+    ]
+  },
+  {
+    "id": "afsharid",
+    "name": "Afsharid Dynasty",
+    "nameFa": "افشاریان",
+    "startYear": 1736,
+    "endYear": 1796,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#9932CC",
+    "capital": {
+      "name": "Mashhad",
+      "lat": 36.2974,
+      "lng": 59.6067
+    },
+    "foreignRule": false,
+    "facts": [
+      "Nader Shah revived military glory; conquered Delhi and briefly made Persia major regional power.",
+      "Dynasty collapsed after Nader's assassination; brief era of warrior kings."
+    ]
+  },
+  {
+    "id": "zand",
+    "name": "Zand Dynasty",
+    "nameFa": "زندیان",
+    "startYear": 1751,
+    "endYear": 1794,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 1,
+    "color": "#FF69B4",
+    "capital": {
+      "name": "Shiraz",
+      "lat": 29.6295,
+      "lng": 52.5311
+    },
+    "foreignRule": false,
+    "facts": [
+      "Karim Khan ruled benevolently as regent; Shiraz flourished as cultural center.",
+      "Brief but stable dynasty; known for justice and patronage of arts."
+    ]
+  },
+  {
+    "id": "qajar",
+    "name": "Qajar Dynasty",
+    "nameFa": "قاجاریان",
+    "startYear": 1789,
+    "endYear": 1925,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#FF1493",
+    "capital": {
+      "name": "Tehran",
+      "lat": 35.6892,
+      "lng": 51.389
+    },
+    "foreignRule": false,
+    "facts": [
+      "Last traditional Persian dynasty; presided over territorial losses to Russia and British influence.",
+      "Constitutional Revolution in 1906 attempted modernization; witnessed emergence of nationalist movements."
+    ]
+  },
+  {
+    "id": "pahlavi",
+    "name": "Pahlavi Dynasty",
+    "nameFa": "پهلوی",
+    "startYear": 1925,
+    "endYear": 1979,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "row": 0,
+    "color": "#191970",
+    "capital": {
+      "name": "Tehran",
+      "lat": 35.6892,
+      "lng": 51.389
+    },
+    "foreignRule": false,
+    "facts": [
+      "Reza Shah and Mohammad Reza Shah pushed rapid modernization and westernization.",
+      "Overthrown by 1979 Islamic Revolution after decades of authoritarian rule and cultural tensions."
+    ]
+  }
+]

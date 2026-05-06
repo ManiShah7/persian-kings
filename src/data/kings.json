@@ -1,0 +1,977 @@
+[
+  {
+    "id": "cyrus-ii",
+    "dynastyId": "achaemenid",
+    "name": "Cyrus II (the Great)",
+    "nameFa": "کوروش دوم",
+    "startYear": -559,
+    "endYear": -530,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Founded world's largest ancient empire and established religious tolerance through the Cyrus Cylinder.",
+      "Legendary conqueror who unified diverse peoples; his empire stretched from the Mediterranean to India."
+    ],
+    "deathCause": "Killed in battle against the Massagetae"
+  },
+  {
+    "id": "darius-i",
+    "dynastyId": "achaemenid",
+    "name": "Darius I",
+    "nameFa": "داریوش اول",
+    "startYear": -522,
+    "endYear": -486,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Organized the empire into provinces (satrapies) and established standardized weights, measures, and coinage.",
+      "Built Persepolis as ceremonial capital; suppressed numerous revolts to consolidate imperial power."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "xerxes-i",
+    "dynastyId": "achaemenid",
+    "name": "Xerxes I",
+    "nameFa": "خشایارشا",
+    "startYear": -486,
+    "endYear": -465,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Launched massive invasion of Greece; defeated at Salamis, Plataea, and the legendary stand at Thermopylae.",
+      "Spent lavishly on court and construction; his reign marked beginning of Persian imperial decline."
+    ],
+    "deathCause": "Assassinated by palace officials"
+  },
+  {
+    "id": "darius-iii",
+    "dynastyId": "achaemenid",
+    "name": "Darius III",
+    "nameFa": "داریوش سوم",
+    "startYear": -336,
+    "endYear": -330,
+    "startYearApprox": false,
+    "endYearApprox": true,
+    "facts": [
+      "Last Achaemenid emperor; defeated catastrophically by Alexander at Gaugamela in 331 BCE.",
+      "Fled eastward after his defeat; empire collapsed within a year of the decisive battle."
+    ],
+    "deathCause": "Killed by his own soldiers while fleeing"
+  },
+  {
+    "id": "arsaces-i",
+    "dynastyId": "parthian",
+    "name": "Arsaces I",
+    "nameFa": "ارساکس اول",
+    "startYear": -247,
+    "endYear": -211,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Founded the Parthian Empire in northeastern Persia; established dynasty that lasted five centuries.",
+      "Declared independence from Seleucids and began expansion that would make Parthians major power."
+    ],
+    "deathCause": "Unknown"
+  },
+  {
+    "id": "mithridates-i",
+    "dynastyId": "parthian",
+    "name": "Mithridates I",
+    "nameFa": "میتریدات اول",
+    "startYear": -171,
+    "endYear": -138,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Expanded Parthian territory dramatically westward; conquered Mesopotamia and challenged Seleucid power.",
+      "Known as Mithridates the Great; transformed Parthia into rival empire to Rome and Syria."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "mithridates-ii",
+    "dynastyId": "parthian",
+    "name": "Mithridates II",
+    "nameFa": "میتریدات دوم",
+    "startYear": -124,
+    "endYear": -88,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Established Silk Road trade routes; controlled crucial commercial networks between China and Mediterranean.",
+      "Peak of Parthian power; extended empire from Mesopotamia to central Asia."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "orodes-ii",
+    "dynastyId": "parthian",
+    "name": "Orodes II",
+    "nameFa": "اورود دوم",
+    "startYear": -57,
+    "endYear": -37,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Defeated Roman General Crassus at Carrhae in 53 BCE; greatest Parthian military victory over Rome.",
+      "Secured Parthian dominance in Middle East; ruled for two decades with firm control."
+    ],
+    "deathCause": "Killed by his son Phraates IV"
+  },
+  {
+    "id": "ardashir-i",
+    "dynastyId": "sasanian",
+    "name": "Ardashir I",
+    "nameFa": "اردشیر اول",
+    "startYear": 224,
+    "endYear": 240,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Overthrew Parthians and founded the Sasanian Empire; established Zoroastrianism as state religion.",
+      "Created sophisticated administrative system that would endure for four centuries."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "shapur-i",
+    "dynastyId": "sasanian",
+    "name": "Shapur I",
+    "nameFa": "شاپور اول",
+    "startYear": 240,
+    "endYear": 270,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Captured Roman Emperor Valerian in battle; Sasania's greatest military triumph over Rome.",
+      "Expanded empire westward and secured Sasanian dominance for generations."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "khosrow-i",
+    "dynastyId": "sasanian",
+    "name": "Khosrow I (Anushirvan)",
+    "nameFa": "خسرو اول",
+    "startYear": 531,
+    "endYear": 579,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Greatest Sasanian ruler; reformed administration, law, and military; known as 'the Just King'.",
+      "Patronized learning and culture; his reign marked Sasanian peak of power and prosperity."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "khosrow-ii",
+    "dynastyId": "sasanian",
+    "name": "Khosrow II",
+    "nameFa": "خسرو دوم",
+    "startYear": 590,
+    "endYear": 628,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Conquered Egypt, Syria, and Palestine in wars against Byzantine Empire; extended Sasania to its maximum extent.",
+      "Later defeated and deposed; symbol of Sasanian imperial overreach before collapse."
+    ],
+    "deathCause": "Executed by his own son Kavad II"
+  },
+  {
+    "id": "yazdegerd-iii",
+    "dynastyId": "sasanian",
+    "name": "Yazdegerd III",
+    "nameFa": "یزدگرد سوم",
+    "startYear": 632,
+    "endYear": 651,
+    "startYearApprox": false,
+    "endYearApprox": true,
+    "facts": [
+      "Last Sasanian king; fought losing battle against Arab Islamic conquest for two decades.",
+      "Fled eastward as empire collapsed; his death ended 400 years of Sasanian rule."
+    ],
+    "deathCause": "Murdered by a robber or executed"
+  },
+  {
+    "id": "abd-al-malik",
+    "dynastyId": "umayyad",
+    "name": "Abd al-Malik ibn Marwan",
+    "nameFa": "عبدالملک بن مروان",
+    "startYear": 685,
+    "endYear": 705,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Umayyad caliph who stabilized the empire and standardized Islamic coinage and administration.",
+      "Built the Dome of the Rock in Jerusalem; reorganized military and taxation systems."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "umar-ii",
+    "dynastyId": "umayyad",
+    "name": "Umar ibn Abd al-Aziz",
+    "nameFa": "عمر بن عبدالعزیز",
+    "startYear": 717,
+    "endYear": 720,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Known as 'Umar the Second'; ruled justly with religious restraint and reform of tax policy.",
+      "Brief reign ended; remembered as ideal Islamic leader despite short tenure."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "hisham",
+    "dynastyId": "umayyad",
+    "name": "Hisham ibn Abd al-Malik",
+    "nameFa": "هشام بن عبدالملک",
+    "startYear": 724,
+    "endYear": 743,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Umayyad caliph during period of relative stability; faced rebellions and financial challenges.",
+      "His reign marked beginning of Umayyad decline toward eventual overthrow."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "al-mansur",
+    "dynastyId": "abbasid",
+    "name": "al-Mansur",
+    "nameFa": "منصور عباسی",
+    "startYear": 754,
+    "endYear": 775,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Second Abbasid caliph; founded Baghdad as new capital in 762 CE; established strong central authority.",
+      "Stabilized Abbasid state; his reign began era of cultural and intellectual flourishing."
+    ],
+    "deathCause": "Natural causes or died on pilgrimage"
+  },
+  {
+    "id": "harun-al-rashid",
+    "dynastyId": "abbasid",
+    "name": "Harun al-Rashid",
+    "nameFa": "هارون الرشید",
+    "startYear": 786,
+    "endYear": 809,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Fifth Abbasid caliph; peak of Abbasid power and cultural achievement; patron of learning.",
+      "Famous in legend and Arabian Nights; expanded imperial power across Islamic world."
+    ],
+    "deathCause": "Died on military campaign in Khurasan"
+  },
+  {
+    "id": "al-mamun",
+    "dynastyId": "abbasid",
+    "name": "al-Ma'mun",
+    "nameFa": "معمون عباسی",
+    "startYear": 813,
+    "endYear": 833,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Abbasid caliph and great patron of sciences; founded House of Wisdom for learning and translation.",
+      "Engaged in theological debates; advanced mathematics, astronomy, and philosophy significantly."
+    ],
+    "deathCause": "Natural causes or illness"
+  },
+  {
+    "id": "al-mustasim",
+    "dynastyId": "abbasid",
+    "name": "al-Musta'sim",
+    "nameFa": "مستعصم عباسی",
+    "startYear": 1242,
+    "endYear": 1258,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Last Abbasid caliph in Baghdad; reigned as Mongol conquest approached and struck.",
+      "Witnessed destruction of Baghdad in 1258; symbol of Abbasid decline and Islamic transformation."
+    ],
+    "deathCause": "Rolled in a carpet and trampled by Mongol horses"
+  },
+  {
+    "id": "ismail-samani",
+    "dynastyId": "samanid",
+    "name": "Ismail ibn Ahmad Samani",
+    "nameFa": "اسماعیل سامانی",
+    "startYear": 892,
+    "endYear": 907,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Founder of Samanid dynasty; established independent Persian state and cultural renaissance.",
+      "Promoted Persian language and literature; built powerful empire in Central Asia and northeastern Persia."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "nasr-ii",
+    "dynastyId": "samanid",
+    "name": "Nasr II ibn Ahmad",
+    "nameFa": "نصر دوم سامانی",
+    "startYear": 914,
+    "endYear": 943,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Expanded Samanid power at height of dynasty; greatest territorial extent of Samanid Empire achieved.",
+      "Patron of arts and literature; supported scholars and scientists during Persian renaissance."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "nuh-i",
+    "dynastyId": "samanid",
+    "name": "Nuh I ibn Nasr",
+    "nameFa": "نوح اول سامانی",
+    "startYear": 943,
+    "endYear": 954,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Samanid ruler during period of internal instability; faced rebellions and territorial losses.",
+      "Maintained Samanid culture and patronage despite political turbulence and family disputes."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "sebuktigin",
+    "dynastyId": "ghaznavid",
+    "name": "Sebuktigin",
+    "nameFa": "سبکتگین",
+    "startYear": 977,
+    "endYear": 997,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Slave general who founded the Ghaznavid Empire; conquered territory from Ghazni eastward.",
+      "Established dynasty that would dominate Central Asia and northern India for two centuries."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "mahmud-of-ghazni",
+    "dynastyId": "ghaznavid",
+    "name": "Mahmud of Ghazni",
+    "nameFa": "محمود غزنوی",
+    "startYear": 998,
+    "endYear": 1030,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Legendary conqueror; launched seventeen campaigns into India; accumulated enormous wealth and treasures.",
+      "Patron of arts and sciences; Ferdowsi completed Shahnameh under his patronage."
+    ],
+    "deathCause": "Natural causes or illness"
+  },
+  {
+    "id": "masud-i",
+    "dynastyId": "ghaznavid",
+    "name": "Mas'ud I",
+    "nameFa": "مسعود اول غزنوی",
+    "startYear": 1030,
+    "endYear": 1040,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Continued Ghaznavid expansion but faced increasing losses to Seljuks in western territories.",
+      "Reign marked beginning of Ghaznavid decline despite continued prosperity in India."
+    ],
+    "deathCause": "Deposed and died in captivity"
+  },
+  {
+    "id": "toghrul-beg",
+    "dynastyId": "seljuk",
+    "name": "Toghrul Beg",
+    "nameFa": "تغرل بیگ",
+    "startYear": 1038,
+    "endYear": 1063,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Founder of Great Seljuk Empire; unified Turkish tribes and conquered Persia from Ghaznavids.",
+      "Established major Islamic empire; his grandson would bring Seljuks to peak power."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "alp-arslan",
+    "dynastyId": "seljuk",
+    "name": "Alp Arslan",
+    "nameFa": "الپ ارسلان",
+    "startYear": 1063,
+    "endYear": 1072,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Defeated Byzantine Emperor at Manzikert in 1071; opened Anatolia to Turkish settlement.",
+      "Brilliant military commander; extended Seljuk territory significantly westward and southward."
+    ],
+    "deathCause": "Killed by an Armenian prisoner he had captured"
+  },
+  {
+    "id": "malik-shah-i",
+    "dynastyId": "seljuk",
+    "name": "Malik Shah I",
+    "nameFa": "ملک شاه اول",
+    "startYear": 1072,
+    "endYear": 1092,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Greatest Seljuk ruler; Seljuk Empire at its height; Isfahan flourished as cultural center.",
+      "Vizier Nizam al-Mulk modernized administration; patronized scholars and artists extensively."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "hulagu-khan",
+    "dynastyId": "ilkhanate",
+    "name": "Hulagu Khan",
+    "nameFa": "هولاکو خان",
+    "startYear": 1256,
+    "endYear": 1265,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Mongol commander who founded Ilkhanate; conquered Persia and sacked Baghdad in 1258.",
+      "Gradually adopted Persian culture and administration; transformed from conqueror into settled ruler."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "abaqa-khan",
+    "dynastyId": "ilkhanate",
+    "name": "Abaqa Khan",
+    "nameFa": "ابقا خان",
+    "startYear": 1265,
+    "endYear": 1282,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Ilkhanate ruler who continued consolidation and further adopted Persian customs and governance.",
+      "Promoted Persian administrators; strengthened Ilkhanate stability after initial conquest period."
+    ],
+    "deathCause": "Poisoned or natural causes"
+  },
+  {
+    "id": "ghazan-khan",
+    "dynastyId": "ilkhanate",
+    "name": "Ghazan Khan",
+    "nameFa": "غازان خان",
+    "startYear": 1295,
+    "endYear": 1304,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Ilkhanate ruler who converted to Islam in 1295; reformed taxation, currency, and land tenure.",
+      "Patronized historian Rashid al-Din whose Compendium of Chronicles became foundational world history."
+    ],
+    "deathCause": "Natural causes or illness"
+  },
+  {
+    "id": "timur",
+    "dynastyId": "timurid",
+    "name": "Timur (Tamerlane)",
+    "nameFa": "تیمور لنگ",
+    "startYear": 1370,
+    "endYear": 1405,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Legendary conqueror who built vast empire through military genius and ruthless conquest.",
+      "Invaded India, Ottoman lands, and Russia; his empire enabled subsequent Timurid cultural renaissance."
+    ],
+    "deathCause": "Died on campaign in Otrar region"
+  },
+  {
+    "id": "shah-rukh",
+    "dynastyId": "timurid",
+    "name": "Shah Rukh",
+    "nameFa": "شاه رخ",
+    "startYear": 1405,
+    "endYear": 1447,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Timurid ruler who abandoned conquest for consolidation; presided over greatest cultural renaissance of era.",
+      "Patron of arts, sciences, and literature; Samarkand became crown jewel of Islamic world."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "ulugh-beg",
+    "dynastyId": "timurid",
+    "name": "Ulugh Beg",
+    "nameFa": "الغ بیگ",
+    "startYear": 1409,
+    "endYear": 1449,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Astronomer and mathematician of highest rank; conducted precise astronomical observations at Samarkand observatory.",
+      "Patron of sciences; his astronomical tables advanced the field significantly across Islamic world."
+    ],
+    "deathCause": "Executed on the orders of his son Abdal-Latif"
+  },
+  {
+    "id": "ismail-i",
+    "dynastyId": "safavid",
+    "name": "Ismail I",
+    "nameFa": "اسماعیل اول",
+    "startYear": 1501,
+    "endYear": 1524,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Founded Safavid Empire; declared Twelver Shia Islam state religion, defining Persian identity permanently.",
+      "Military genius who conquered vast territory; initiated Persian cultural and political independence."
+    ],
+    "deathCause": "Natural causes or illness"
+  },
+  {
+    "id": "tahmasp-i",
+    "dynastyId": "safavid",
+    "name": "Tahmasp I",
+    "nameFa": "تهماسب اول",
+    "startYear": 1524,
+    "endYear": 1576,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Longest-reigning Safavid; survived Ottoman and Uzbek pressures; stabilized Safavid state.",
+      "Patron of arts and literature; his court became center of Persian cultural achievement."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "abbas-i",
+    "dynastyId": "safavid",
+    "name": "Abbas I (the Great)",
+    "nameFa": "عباس اول",
+    "startYear": 1588,
+    "endYear": 1629,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Greatest Safavid ruler; military victories restored Persian territory; reformed administration thoroughly.",
+      "Relocated capital to Isfahan; transformed it into one of world's most beautiful cities."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "abbas-ii",
+    "dynastyId": "safavid",
+    "name": "Abbas II",
+    "nameFa": "عباس دوم",
+    "startYear": 1642,
+    "endYear": 1666,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Safavid ruler who continued prosperity of Abbas the Great's reign; maintained military strength.",
+      "Reigned during period of stability and cultural achievement in Isfahan."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "agha-mohammad-khan",
+    "dynastyId": "qajar",
+    "name": "Agha Mohammad Khan",
+    "nameFa": "آقا محمد خان",
+    "startYear": 1786,
+    "endYear": 1797,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Founded Qajar Dynasty; unified fragmented Persia through military campaigns and ruthless consolidation.",
+      "Reestablished central authority after decades of chaos and foreign interference."
+    ],
+    "deathCause": "Assassinated by his own guards"
+  },
+  {
+    "id": "fath-ali-shah",
+    "dynastyId": "qajar",
+    "name": "Fath-Ali Shah",
+    "nameFa": "فتح علی شاه",
+    "startYear": 1797,
+    "endYear": 1834,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Long Qajar reign during which Persia lost vast territories to Russia and Britain.",
+      "Wars and treaties undermined Persian power; his era marked beginning of Western domination."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "nasir-al-din-shah",
+    "dynastyId": "qajar",
+    "name": "Nasir al-Din Shah",
+    "nameFa": "ناصر الدین شاه",
+    "startYear": 1848,
+    "endYear": 1896,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Longest Qajar reign; attempted modernization and reform amid foreign pressure and internal resistance.",
+      "Witnessed Persian weakness and granted many concessions; catalyst for 1906 Constitutional Revolution."
+    ],
+    "deathCause": "Assassinated by nationalist Mirza Reza Kirmani"
+  },
+  {
+    "id": "ahmad-shah",
+    "dynastyId": "qajar",
+    "name": "Ahmad Shah Qajar",
+    "nameFa": "احمد شاه قاجار",
+    "startYear": 1909,
+    "endYear": 1925,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Crowned at age 11; reigned weakly during constitutional turmoil and foreign occupation in WWI.",
+      "Exiled to Europe in 1923; formally deposed by Reza Khan in 1925, ending the Qajar dynasty."
+    ],
+    "deathCause": "Died in exile in Europe"
+  },
+  {
+    "id": "reza-shah-pahlavi",
+    "dynastyId": "pahlavi",
+    "name": "Reza Shah Pahlavi",
+    "nameFa": "رضا شاه پهلوی",
+    "startYear": 1925,
+    "endYear": 1941,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Founded Pahlavi Dynasty; transformed Persia into modern nation through military and administrative reform.",
+      "Built railways, hospitals, and schools; secularized laws and challenged tribal and clerical power."
+    ],
+    "deathCause": "Died in exile in South Africa"
+  },
+  {
+    "id": "mohammad-reza-shah",
+    "dynastyId": "pahlavi",
+    "name": "Mohammad Reza Shah Pahlavi",
+    "nameFa": "محمد رضا شاه پهلوی",
+    "startYear": 1941,
+    "endYear": 1979,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Last Persian/Iranian monarch; continued modernization and westernization; 1953 CIA coup restored his power.",
+      "Overthrown by 1979 Islamic Revolution; symbol of autocracy and Western influence to revolutionaries."
+    ],
+    "deathCause": "Died in exile from cancer"
+  },
+  {
+    "id": "cyaxares",
+    "dynastyId": "median",
+    "name": "Cyaxares",
+    "nameFa": "هووخشتره",
+    "startYear": -625,
+    "endYear": -585,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Median ruler who organized the Median Empire and resisted Assyrian dominance successfully.",
+      "Legendary warrior-king; his empire influenced Persian political structure and traditions."
+    ],
+    "deathCause": "Unknown"
+  },
+  {
+    "id": "alexander-the-great",
+    "dynastyId": "macedonian",
+    "name": "Alexander the Great",
+    "nameFa": "اسکندر مقدونی",
+    "startYear": -336,
+    "endYear": -323,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Macedonian conqueror who destroyed the Achaemenid Empire and spread Hellenistic culture across Asia.",
+      "Undefeated in battle; his thirteen-year reign transformed the ancient world dramatically."
+    ],
+    "deathCause": "Died in Babylon of fever or illness"
+  },
+  {
+    "id": "seleucus-i",
+    "dynastyId": "seleucid",
+    "name": "Seleucus I Nicator",
+    "nameFa": "سلوکس اول",
+    "startYear": -312,
+    "endYear": -280,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Alexander's general who seized Persian territories and founded Seleucid Empire after Alexander's death.",
+      "Controlled vast eastern territories; his dynasty ruled for over 150 years."
+    ],
+    "deathCause": "Assassinated by Ptolemy Ceraunus"
+  },
+  {
+    "id": "antiochus-iii",
+    "dynastyId": "seleucid",
+    "name": "Antiochus III the Great",
+    "nameFa": "آنتیوخوس سوم",
+    "startYear": -223,
+    "endYear": -187,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Seleucid ruler who attempted to reclaim lost territories; defeated decisively by Rome at Magnesia.",
+      "Reduced Seleucid power in Asia Minor; his reign marked turning point in Seleucid decline."
+    ],
+    "deathCause": "Killed by a mob during a temple robbery"
+  },
+  {
+    "id": "tahir-ibn-al-husayn",
+    "dynastyId": "tahirid",
+    "name": "Tahir ibn al-Husayn",
+    "nameFa": "طاهر بن الحسین",
+    "startYear": 821,
+    "endYear": 822,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Abbasid general who became first Tahirid ruler; established dynasty's independence from Caliphate.",
+      "Brief reign initiated century of Tahirid semi-autonomous rule in Khorasan."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "abdallah-ibn-tahir",
+    "dynastyId": "tahirid",
+    "name": "Abdallah ibn Tahir",
+    "nameFa": "عبدالله بن طاهر",
+    "startYear": 828,
+    "endYear": 845,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Tahirid consolidator; established stable administration and promoted Persian culture and learning.",
+      "Greatest Tahirid ruler; his reign marked peak of Tahirid power and prosperity."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "yaqub-al-layth",
+    "dynastyId": "saffarid",
+    "name": "Ya'qub ibn al-Layth al-Saffar",
+    "nameFa": "یعقوب لیث صفار",
+    "startYear": 861,
+    "endYear": 879,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Coppersmith turned conqueror; founded Saffarid dynasty through rapid military campaigns.",
+      "Challenged Abbasid authority decisively in eastern Persia and Central Asia."
+    ],
+    "deathCause": "Died of battle wounds or illness"
+  },
+  {
+    "id": "mardavij-ibn-ziyar",
+    "dynastyId": "ziyarid",
+    "name": "Mardavij ibn Ziyar",
+    "nameFa": "مردویج بن زیار",
+    "startYear": 928,
+    "endYear": 935,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Ziyarid founder who controlled Caspian region and defied both Abbasids and Buyids.",
+      "Ambitious conqueror; his assassination ended brief era of Ziyarid expansion."
+    ],
+    "deathCause": "Assassinated by his servants"
+  },
+  {
+    "id": "muiz-al-dawla",
+    "dynastyId": "buyid",
+    "name": "Mu'izz al-Dawla (Ahmad ibn Buyeh)",
+    "nameFa": "معز الدولة",
+    "startYear": 945,
+    "endYear": 967,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Buyid founder; conquered Baghdad and reduced Sunni Abbasid authority significantly.",
+      "Established Shia dynasty in Mesopotamia; his reign marked Buyid peak power."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "adud-al-dawla",
+    "dynastyId": "buyid",
+    "name": "Adud al-Dawla",
+    "nameFa": "عضد الدولة",
+    "startYear": 978,
+    "endYear": 983,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Greatest Buyid ruler; unified Buyid domains and became most powerful Muslim ruler of his era.",
+      "Major patron of arts, sciences, and architecture; court of exceptional cultural refinement."
+    ],
+    "deathCause": "Natural causes or illness"
+  },
+  {
+    "id": "anushtegin",
+    "dynastyId": "khwarazmian",
+    "name": "Anushtegin",
+    "nameFa": "انوشتگین",
+    "startYear": 1077,
+    "endYear": 1097,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Slave general who founded Khwarazmian dynasty; controlled Central Asian trade routes.",
+      "Established kingdom that would rival major powers for over 150 years."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "tekish",
+    "dynastyId": "khwarazmian",
+    "name": "Tekish",
+    "nameFa": "تکش",
+    "startYear": 1172,
+    "endYear": 1200,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Khwarazmian ruler during period of expansion; fought against Qara Khitai and Seljuks.",
+      "Controlled crucial Silk Road networks; accumulated great wealth and power."
+    ],
+    "deathCause": "Killed by Khwarazmian nobles or natural causes"
+  },
+  {
+    "id": "shahriyar-iv",
+    "dynastyId": "bavandid",
+    "name": "Shahriyar IV",
+    "nameFa": "شهریار چهارم",
+    "startYear": 1084,
+    "endYear": 1120,
+    "startYearApprox": true,
+    "endYearApprox": true,
+    "facts": [
+      "Bavandid ruler who maintained independence in Caspian region during Seljuk era.",
+      "Long reign; preserved Bavandid dynasty through shifting political landscape."
+    ],
+    "deathCause": "Unknown"
+  },
+  {
+    "id": "mubariz-al-din-muhammad",
+    "dynastyId": "muzaffarid",
+    "name": "Mubariz al-Din Muhammad",
+    "nameFa": "مبارز الدین محمد",
+    "startYear": 1314,
+    "endYear": 1358,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Muzaffarid founder; conquered multiple cities and became major regional power.",
+      "Patron of arts and culture; captured by Timur and died in captivity."
+    ],
+    "deathCause": "Died in captivity under Timur"
+  },
+  {
+    "id": "shaikh-uways",
+    "dynastyId": "jalayirid",
+    "name": "Shaikh Uways",
+    "nameFa": "شیخ اویس",
+    "startYear": 1356,
+    "endYear": 1374,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Jalayirid ruler; major patron of Persian poetry, miniature art, and calligraphy.",
+      "His court became center of exceptional cultural achievement despite political instability."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "khwaja-ali",
+    "dynastyId": "sarbadars",
+    "name": "Khwaja Ali",
+    "nameFa": "خواجه علی",
+    "startYear": 1337,
+    "endYear": 1338,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Sarbadar movement leader; attempted religious and social revolution against feudal system.",
+      "Brief rule; movement sought egalitarianism and challenged established order."
+    ],
+    "deathCause": "Unknown"
+  },
+  {
+    "id": "jahan-shah",
+    "dynastyId": "kara-koyunlu",
+    "name": "Jahan Shah",
+    "nameFa": "جهان شاه",
+    "startYear": 1438,
+    "endYear": 1467,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Kara Koyunlu ruler; controlled western Persia and Iraq; major art patron.",
+      "Competed with Aq Koyunlu for regional dominance; defeated and killed by rival."
+    ],
+    "deathCause": "Killed in battle against Aq Koyunlu"
+  },
+  {
+    "id": "uzun-hasan",
+    "dynastyId": "aq-koyunlu",
+    "name": "Uzun Hasan",
+    "nameFa": "اوزون حسن",
+    "startYear": 1453,
+    "endYear": 1478,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Aq Koyunlu ruler; defeated Kara Koyunlu; challenged Ottoman power in Anatolia.",
+      "Ambitious conqueror; court attracted great scholars, artists, and poets."
+    ],
+    "deathCause": "Natural causes"
+  },
+  {
+    "id": "nader-shah",
+    "dynastyId": "afsharid",
+    "name": "Nader Shah",
+    "nameFa": "نادر شاه",
+    "startYear": 1736,
+    "endYear": 1747,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Greatest Afsharid; invaded and conquered Delhi; restored Persian military glory briefly.",
+      "Brutal conqueror; accumulated enormous wealth; assassinated by officers after erratic rule."
+    ],
+    "deathCause": "Assassinated by his own military officers"
+  },
+  {
+    "id": "karim-khan-zand",
+    "dynastyId": "zand",
+    "name": "Karim Khan Zand",
+    "nameFa": "کریم خان زند",
+    "startYear": 1750,
+    "endYear": 1779,
+    "startYearApprox": false,
+    "endYearApprox": false,
+    "facts": [
+      "Zand founder; ruled benevolently as regent without claiming kingship title.",
+      "Transformed Shiraz into cultural center; known for justice and patronage of arts."
+    ],
+    "deathCause": "Natural causes"
+  }
+]
