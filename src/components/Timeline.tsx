@@ -17,6 +17,7 @@ const Timeline = () => {
 
   const svgWidth = (Math.abs(MIN_YEAR) + MAX_YEAR) * PIXELS_PER_YEAR;
   const svgHeight =
+    ROW_HEIGHT +
     (TOP_OFFSET * Math.max(...dynasties.map((d) => d.row)) * ROW_HEIGHT) / 30;
 
   return (
