@@ -6,3 +6,6 @@ export const NUM_DYNASTY_ROWS = 5; // rows 0-4
 export const NUM_EVENT_ROWS = 3; // politics-wars, culture-religion, science
 export const TOP_OFFSET = 80; // space at top for the year ticker
 export const EVENT_ROWS_TOP = TOP_OFFSET;
+
+export const ALL_YEARS = Math.abs(MIN_YEAR) + MAX_YEAR;
+export const APP_WIDTH = ALL_YEARS * PIXELS_PER_YEAR;
