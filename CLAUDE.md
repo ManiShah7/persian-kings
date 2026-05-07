@@ -90,6 +90,30 @@ Pending decisions to revisit when resuming. None block the next step (writing ce
 
 ## Resume context (for next session)
 
-- Phase 1 (static skeleton) is in progress. The interaction-model decisions above land before the next code is written.
-- **Tutor mode is active for this project**: the assistant teaches and refines ideas, the user writes the code. The assistant should not produce implementation code unless explicitly asked.
-- Next concrete step on resume: design the `yearToX` / `xToYear` helpers and the top-level state shape, then build the playhead-driven render. Suggest discussing what data those helpers need to accept (year, pixelsPerYear, padding/offset, playhead viewport position) before code.
+- Phase 1 (static skeleton) is in progress.
+- **Tutor mode is active**: assistant teaches, user writes the code. Do not produce implementation unless explicitly asked.
+
+### Done so far
+
+- `src/utils/coords.ts`: `yearToX(year, pixelsPerYear)` and `xToYear(x, pixelsPerYear)` helpers. Anchored at `MIN_YEAR`. Scale passed as argument, not imported (zoom-ready).
+- `Timeline.tsx`: routed through `yearToX`. No inline `* PIXELS_PER_YEAR` left in render code.
+- Renamed `YearLine.tsx` → `YearAxis.tsx`. App import updated.
+- `YearAxis.tsx`: ticks aligned to multiples of `yearStep` (100). Generated from `firstTick = Math.trunc(MIN_YEAR/100)*100` (-700) to `lastTick = Math.trunc(MAX_YEAR/100)*100` (1900). `MIN_YEAR` (-728) and `MAX_YEAR` (1979) added as explicit end-cap spans. BC label: `Math.abs(year)` + `" BC"`.
+- `YearTick` component extraction in progress (single span -> reusable component).
+
+### Still drift from plan — to reconcile next
+
+- `App.tsx` still uses native DOM scroll (`overflow-x: auto`, wheel handler pushes `scrollLeft`). Plan says playhead + transform, not native scroll.
+- Year ticker (`<h2>`) hardcoded to `MIN_YEAR`. No `activeYear` state yet.
+- No `<g transform>` wrap on Timeline. No `Playhead` component.
+- `Timeline.tsx`: kings rendered as one comma-joined text label per dynasty band. Plan calls for per-king rects with hover names.
+- `Timeline.tsx`: row-y formula `(TOP_OFFSET * dynasty.row * ROW_HEIGHT) / 30` has unexplained `/30`. Investigate or fix.
+- `YearAxis.tsx`: format inconsistency — the explicit MIN_YEAR end-cap prints `{MIN_YEAR}` raw (would render `-728`); regular ticks use `"X BC"` formatting.
+
+### Next concrete step
+
+1. In `App.tsx`, add `useState<number>(MIN_YEAR)` for `activeYear`.
+2. Pass to / have the ticker read `activeYear` instead of hardcoded `MIN_YEAR`.
+3. Leave wheel + scroll unchanged for now. Goal: state exists and ticker is no longer hardcoded — behavior identical.
+
+After that, in order: (a) wheel handler updates `activeYear` (still in pixel-delta, converted via `pixelsPerYear`); (b) wrap Timeline content in `<g transform="translate(-offsetX,0)">` driven by `activeYear`, remove `overflow-x: auto`; (c) add fixed `Playhead` line at ~20–25% viewport-x; (d) tune wheel sensitivity by feel.
