@@ -1,29 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useAtomValue } from "jotai";
 import Timeline from "./components/Timeline";
 import YearAxis from "./components/YearAxis";
-import { MIN_YEAR } from "./utils/constants";
+import { activeYearAtom } from "./state/atoms";
 
 function App() {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const el = wrapperRef.current;
-
-    if (!el) return;
-
-    const onWheel = (e: WheelEvent) => {
-      if (e.deltaY === 0) return;
-      e.preventDefault();
-      el.scrollLeft += e.deltaY;
-    };
-
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, []);
+  const activeYear = useAtomValue(activeYearAtom);
 
   return (
     <div
-      ref={wrapperRef}
       style={{
         overflowX: "auto",
         padding: "75px 0",
@@ -31,7 +15,7 @@ function App() {
       }}
     >
       <div style={{ position: "fixed", top: 0, backgroundColor: "red" }}>
-        <h2>Year: {MIN_YEAR}</h2>
+        <h2>Year: {activeYear}</h2>
       </div>
       <Timeline />
       <YearAxis />

@@ -1,10 +1,12 @@
+import { useAtom } from "jotai";
 import {
   APP_WIDTH,
   MAX_YEAR,
   MIN_YEAR,
   PIXELS_PER_YEAR,
 } from "../utils/constants";
-import { yearToX } from "../utils/coords";
+import { xToYear, yearToX } from "../utils/coords";
+import { activeYearAtom } from "../state/atoms";
 import YearTick from "./YearTick";
 
 const YearAxis = () => {
@@ -15,10 +17,18 @@ const YearAxis = () => {
   const firstYearX = yearToX(MIN_YEAR, PIXELS_PER_YEAR);
   const lastYearX = yearToX(MAX_YEAR, PIXELS_PER_YEAR);
 
+  const [activeYear, setActiveYear] = useAtom(activeYearAtom);
+
   const ticks = Array.from({ length: totalYears }, (_, i) => {
     const year = firstTick + i * yearStep;
     return { year, x: yearToX(year, PIXELS_PER_YEAR) };
   });
+
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const year = xToYear(Number(e.target.value), PIXELS_PER_YEAR);
+
+    setActiveYear(Math.round(year));
+  };
 
   return (
     <div
@@ -30,6 +40,17 @@ const YearAxis = () => {
         marginTop: "5px",
       }}
     >
+      {activeYear}
+
+      <input
+        type="range"
+        min={firstYearX}
+        max={lastYearX}
+        value={yearToX(activeYear, PIXELS_PER_YEAR)}
+        style={{ width: "100%", marginTop: "20px" }}
+        onChange={handleRangeChange}
+      />
+
       <YearTick x={firstYearX} year={MIN_YEAR} />
 
       {ticks.map((tick) => (
