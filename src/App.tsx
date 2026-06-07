@@ -9,7 +9,6 @@ function App() {
   return (
     <div
       style={{
-        overflowX: "auto",
         padding: "75px 0",
         position: "relative",
       }}

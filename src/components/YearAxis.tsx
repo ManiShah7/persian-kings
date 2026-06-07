@@ -30,35 +30,63 @@ const YearAxis = () => {
     setActiveYear(Math.round(year));
   };
 
+  const playheadX = 300;
+
+  const maxOffset = APP_WIDTH - window.innerWidth;
+  const svgOffsetX = Math.min(
+    Math.max(0, yearToX(activeYear, PIXELS_PER_YEAR) - playheadX),
+    maxOffset,
+  );
+
   return (
-    <div
-      style={{
-        position: "relative",
-        backgroundColor: "black",
-        width: `${APP_WIDTH}px`,
-        height: "1px",
-        marginTop: "5px",
-      }}
-    >
-      {activeYear}
+    <>
+      <div
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          height: "40px",
+        }}
+      >
+        <div
+          style={{
+            transform: `translate(${-svgOffsetX}px)`,
+            width: `${APP_WIDTH}px`,
 
-      <input
-        type="range"
-        min={firstYearX}
-        max={lastYearX}
-        value={yearToX(activeYear, PIXELS_PER_YEAR)}
-        style={{ width: "100%", marginTop: "20px" }}
-        onChange={handleRangeChange}
-      />
+            backgroundColor: "black",
+            height: "1px",
+            marginTop: "5px",
+          }}
+        >
+          {activeYear}
 
-      <YearTick x={firstYearX} year={MIN_YEAR} />
+          <YearTick x={firstYearX} year={MIN_YEAR} />
 
-      {ticks.map((tick) => (
-        <YearTick key={tick.year} x={tick.x} year={tick.year} />
-      ))}
+          {ticks.map((tick) => (
+            <YearTick key={tick.year} x={tick.x} year={tick.year} />
+          ))}
 
-      <YearTick x={lastYearX} year={MAX_YEAR} />
-    </div>
+          <YearTick x={lastYearX} year={MAX_YEAR} />
+        </div>
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          marginTop: "50px",
+        }}
+      >
+        <input
+          type="range"
+          min={firstYearX}
+          max={lastYearX}
+          value={yearToX(activeYear, PIXELS_PER_YEAR)}
+          style={{ width: "100%", marginTop: "20px" }}
+          onChange={handleRangeChange}
+        />
+      </div>
+    </>
   );
 };
 
