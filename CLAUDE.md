@@ -1,119 +1,94 @@
-# Iranian Kings Timeline
+# Persian Kings — Interactive History Timeline
 
-Interactive horizontal SVG timeline visualising Iranian dynasties and kings from the Median Empire (-728) to the Pahlavi Dynasty (1979), with parallel rows for overlapping dynasties, an events ribbon, and a per-dynasty map panel.
+An interactive, horizontally-scrollable timeline of Persian/Iranian history from the
+Median Empire (728 BC) through the fall of the Pahlavi dynasty (1979). Dynasties,
+their kings, and major historical events are plotted on a shared time axis the user
+can pan and zoom through.
 
-## Stack
+## Purpose
 
-- Vite + React + TypeScript
-- Plain CSS (no Tailwind/UnoCSS yet)
-- Raw SVG (no chart libraries)
-- No state library yet (useState/useContext only)
+This is a **portfolio / resume project**. The bar is "extremely professional": the
+code, architecture, and visual design should all be presentable to potential
+employers. When making decisions, favor clean abstractions, correct typing, and
+polished UX over quick hacks. Treat visual design and interaction quality as
+first-class concerns, not afterthoughts.
 
-## Data
+## Tech Stack
 
-Three JSON files under `/src/data/`:
+- **React 19** + **TypeScript** (strict) + **Vite 8**
+- **Jotai** for state (atoms in `src/state/`)
+- **SVG** for timeline rendering (not canvas/DOM)
+- No CSS framework yet — plain inline styles + `index.css` (styling is placeholder)
 
-- `dynasties.json` (29 dynasties)
-- `kings.json` (65 significant kings, not all kings)
-- `events.json` (40 historical events across 3 categories: politics-wars, culture-religion, science)
+Scripts: `npm run dev` (Vite dev server), `npm run build` (`tsc -b && vite build`),
+`npm run lint` (ESLint), `npm run preview`.
 
-Conventions:
+## Domain Model
 
-- BCE years are negative integers. No year 0.
-- `row` is 0-indexed lane assignment for parallel dynasties.
-- Maps go in `/public/maps/[dynastyId].svg`, portraits in `/public/portraits/[kingId].webp`.
-- `foreignRule: true` for non-Iranian-origin dynasties (Macedonian, Seleucid, Umayyad, Abbasid, Ilkhanate, Jalayirid).
+Three datasets in `src/data/`, all keyed by string `id`:
 
-## Layout (top to bottom)
+- **`dynasties.json`** (`Dynasty`) — a ruling house/empire. Has `startYear`/`endYear`,
+  a `row` (0–4, which lane it draws in), a `color`, a `capital` (`{name, lat, lng}`),
+  a `foreignRule` flag, and `facts[]`. ~30 entries spanning Medes → Pahlavi.
+- **`kings.json`** (`King`) — an individual ruler. Belongs to a dynasty via
+  `dynastyId`. Has reign `startYear`/`endYear`, `nameFa` (Persian name), `facts[]`,
+  and `deathCause`.
+- **`events.json`** — discrete historical moments (battles, books, discoveries).
+  Has a single `year`, a `category` (`politics-wars` | `culture-religion` |
+  `science`), `title`/`titleFa`, and a `fact`. **Not yet rendered.** (No TS type
+  defined for events yet — add one in `src/types/` when wiring these up.)
 
-1. Big sticky year ticker (updates with scroll)
-2. 3 event rows
-3. 5 dynasty rows (row 0 = main line; row 4 = Bavandid)
-4. Map panel (per-dynasty, swaps based on scroll position)
+Conventions across all data:
+- Years are signed integers; **negative = BC** (e.g. `-550`). There is no year 0.
+- `startYearApprox`/`endYearApprox`/`yearApprox` booleans flag uncertain dates —
+  surface these in the UI (e.g. a `c.` prefix) rather than presenting them as exact.
+- `nameFa`/`titleFa` hold Persian (Farsi, RTL) text for bilingual display.
 
-## Visual concept
+## Coordinate System
 
-- **Dynasty bands**: coloured rectangles spanning each dynasty's full duration
-- **Kings**: smaller rectangles rendered on top of dynasty bands, spanning each king's reign. Names shown on hover (later: portraits inside the rects)
-- **Events**: always-visible labels on their category rows
-- Background gradient shifts from warm earthy tones (pre-Islamic) to cooler Islamic palette around 651 CE
-- Caliphates rendered with greyed/striped "foreign rule" treatment
-- Alexander gets a fire/destruction visual motif
+The timeline maps **years → x-pixels** linearly. This is the spine of the whole app.
 
-## Constants
+- `src/utils/constants.ts` — `MIN_YEAR` (-728), `MAX_YEAR` (1979), `PIXELS_PER_YEAR`,
+  `ROW_HEIGHT`, row counts, offsets. `APP_WIDTH` is the full timeline width in px.
+- `src/utils/coords.ts` — `yearToX(year, pps)` and `xToYear(x, pps)`. Always convert
+  through these, never compute pixel offsets inline.
+- Dynasties stack into lanes by their `row`; kings will nest within their dynasty's
+  span; events belong in category lanes.
 
-- MIN_YEAR: -750, MAX_YEAR: 2000 (with padding)
-- PIXELS_PER_YEAR: 3 (default zoom)
-- ROW_HEIGHT: 60
-- TOP_OFFSET: 80
+## State
 
-## Plan (phased)
+`src/state/atoms.ts` — currently just `activeYearAtom` (the focused year). Components
+read it via Jotai `useAtomValue`/`useAtom`. The active year drives the horizontal
+pan offset (a "playhead" the timeline scrolls to keep in view).
 
-- **Phase 0** (done): Data files
-- **Phase 1** (in progress): Timeline skeleton (dynasty bands, king rects)
-- **Phase 2**: Horizontal scroll, zoom, drag scrubber, dynasty jump buttons
-- **Phase 3**: Map panel that swaps per dynasty as user scrolls
-- **Phase 4**: AI-generated coin/engraved-style portraits (SDXL via ComfyUI on local RTX 4060)
-- **Phase 5**: Polish (typography, transitions, mobile pass)
+## Architecture Notes / Known Rough Edges
 
-## Decisions locked
+The app works but is mid-refactor. Be aware:
 
-- Linear time scaling with zoom (not logarithmic)
-- Coin/engraved portrait style for consistency
-- Mix of dry historical and punchy fact tone
-- Includes any dynasty that ruled from Iranian soil
-- Desktop first, mobile later
-- ~3-5 kings per major dynasty, 1-2 per minor (not all kings)
+- **Navigation is changing.** The current model is a range-slider that scrubs a fixed
+  playhead. The **intended** model is **free horizontal scroll/pan + zoom** (direct
+  drag-to-pan, zoom to change the time scale). New navigation work should move toward
+  scroll/pan/zoom; the slider is transitional.
+- `window.innerWidth` is read directly in render (`Timeline.tsx`, `YearAxis.tsx`) —
+  not resize-reactive. Revisit when reworking navigation.
+- `Timeline.tsx` and `YearAxis.tsx` duplicate the playhead/offset math. Worth
+  hoisting into a shared hook or derived atom.
+- Placeholder styling (red fixed header, raw SVG `<text>`) — slated for a design pass.
 
-## Interaction model (decided 2026-05-06)
+## Roadmap (priority order)
 
-The timeline uses a **playhead model**, not page scroll. A fixed vertical line in the viewport marks the active year; the timeline slides under it as the user scrubs. UX framing: this is a **story**, not a research tool — bias all UX calls toward narrative momentum over comparative analysis.
+1. **Render events** — wire `events.json` into the three category lanes; add an
+   `Event` type.
+2. **Detail panel** — click a dynasty / king / event to open a panel with its facts,
+   dates, capital, death cause, etc.
+3. **Map of capitals** — use each dynasty's `capital` lat/lng to plot capitals on a map.
+4. **Visual / styling polish** — replace placeholder styling with a deliberate,
+   professional design.
+5. **Free scroll/pan + zoom navigation** (see above) — underpins the interaction model.
 
-- **Primary state**: `activeYear` (number, can be fractional). Single source of truth. Everything is derived from it: timeline transform offset, year ticker, year axis labels, BG gradient (warm→cool around 651 CE), Alexander fire motif, caliphate greyed/striped treatment, map panel selection.
-- **Architecture**: React state + SVG transform. Inner `<g>` shifts via `transform: translate(-offsetX, 0)` where `offsetX = yearToX(activeYear) - playheadViewportX`. **Not** native DOM scroll. Reason: the playhead model needs `activeYear` as the single state value driving every visual; native scroll puts the truth in the DOM and forces imperative sync.
-- **Playhead position**: fixed vertical line at ~20–25% from left edge of viewport. Glows / has active treatment so user connects it to the corner year ticker. Left-offset (not centred) chosen because the project is narrative — reading-direction matches discovery direction, more upcoming content visible.
-- **Wheel input**: scroll down = forward in time (timeline slides left). Wheel delta is **pixels** of intended timeline movement, then converted to year delta via current `pixelsPerYear`. Implication: scrub feel auto-adjusts with zoom — more zoom = finer scrubbing. Sensitivity to be tuned by feel after first build.
-- **Clamping**: hard clamp at `MIN_YEAR` / `MAX_YEAR`. No void scrolling, no elastic bounce.
-- **Coordinate math**: centralised in `yearToX(year, pixelsPerYear, …)` and `xToYear(x, pixelsPerYear, …)` helpers. **Do not** import `PIXELS_PER_YEAR` as a constant inside render code — pass scale in as a parameter. Reason: `pixelsPerYear` becomes runtime state at P2 (zoom). Writing render code against a parameter from day 1 means zoom requires zero refactor of render code.
-- **Zoom invariant** (will land at P2): when user zooms, the year under the playhead must stay locked. This falls out for free if `activeYear` is the primary state — zoom only changes `pixelsPerYear`, render redraws, year stays fixed under the line.
+## Conventions
 
-## Open questions / WIP
-
-Pending decisions to revisit when resuming. None block the next step (writing centralised coord helpers + the playhead-driven render skeleton); they can be settled as the relevant code lands.
-
-- **State sharing pattern**: prop-drill `activeYear` from `App`, or use React Context? ~5 components read it. Lean: defer until prop-drilling actually feels painful. No state library yet (per Stack).
-- **Wheel sensitivity value**: ship a starting default, then tune live by feel. Not a paper decision.
-- **Year axis at bottom**: tick density per zoom level (decade / half-century / century thresholds). Render-time concern, decide while building.
-- **Animation strategy** (P2+): for any moving SVG element, prefer CSS `transform` on a wrapping `<g>`, not animating SVG `x`/`y` attributes. Decide per feature.
-- **Initial `activeYear` on load**: -728 (start) vs some "interesting" year vs persisted last position. Defer.
-- **Horizontal scrollbar UI**: with the playhead model there is no native scrollbar. Decide later whether to add a custom drag-scrubber bar (was already planned for P2) and how it relates to the wheel.
-
-## Resume context (for next session)
-
-- Phase 1 (static skeleton) is in progress.
-- **Tutor mode is active**: assistant teaches, user writes the code. Do not produce implementation unless explicitly asked.
-
-### Done so far
-
-- `src/utils/coords.ts`: `yearToX(year, pixelsPerYear)` and `xToYear(x, pixelsPerYear)` helpers. Anchored at `MIN_YEAR`. Scale passed as argument, not imported (zoom-ready).
-- `Timeline.tsx`: routed through `yearToX`. No inline `* PIXELS_PER_YEAR` left in render code.
-- Renamed `YearLine.tsx` → `YearAxis.tsx`. App import updated.
-- `YearAxis.tsx`: ticks aligned to multiples of `yearStep` (100). Generated from `firstTick = Math.trunc(MIN_YEAR/100)*100` (-700) to `lastTick = Math.trunc(MAX_YEAR/100)*100` (1900). `MIN_YEAR` (-728) and `MAX_YEAR` (1979) added as explicit end-cap spans. BC label: `Math.abs(year)` + `" BC"`.
-- `YearTick` component extraction in progress (single span -> reusable component).
-
-### Still drift from plan — to reconcile next
-
-- `App.tsx` still uses native DOM scroll (`overflow-x: auto`, wheel handler pushes `scrollLeft`). Plan says playhead + transform, not native scroll.
-- Year ticker (`<h2>`) hardcoded to `MIN_YEAR`. No `activeYear` state yet.
-- No `<g transform>` wrap on Timeline. No `Playhead` component.
-- `Timeline.tsx`: kings rendered as one comma-joined text label per dynasty band. Plan calls for per-king rects with hover names.
-- `Timeline.tsx`: row-y formula `(TOP_OFFSET * dynasty.row * ROW_HEIGHT) / 30` has unexplained `/30`. Investigate or fix.
-- `YearAxis.tsx`: format inconsistency — the explicit MIN_YEAR end-cap prints `{MIN_YEAR}` raw (would render `-728`); regular ticks use `"X BC"` formatting.
-
-### Next concrete step
-
-1. In `App.tsx`, add `useState<number>(MIN_YEAR)` for `activeYear`.
-2. Pass to / have the ticker read `activeYear` instead of hardcoded `MIN_YEAR`.
-3. Leave wheel + scroll unchanged for now. Goal: state exists and ticker is no longer hardcoded — behavior identical.
-
-After that, in order: (a) wheel handler updates `activeYear` (still in pixel-delta, converted via `pixelsPerYear`); (b) wrap Timeline content in `<g transform="translate(-offsetX,0)">` driven by `activeYear`, remove `overflow-x: auto`; (c) add fixed `Playhead` line at ~20–25% viewport-x; (d) tune wheel sensitivity by feel.
+- TypeScript is strict — keep it that way; no `any`, define types in `src/types/`.
+- Keep year↔pixel math in `coords.ts`; keep magic numbers in `constants.ts`.
+- The user prefers concise communication and does end-of-build cleanup themselves —
+  don't flag DRY/refactor nits mid-feature.

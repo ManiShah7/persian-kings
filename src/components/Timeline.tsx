@@ -3,24 +3,30 @@ import kingsData from "../data/kings.json";
 import type { Dynasty } from "../types/Dynasty";
 import {
   APP_WIDTH,
-  NUM_DYNASTY_ROWS,
+  CATEGORY_META,
+  CATEGORY_ORDER,
+  EVENT_BAND_TOP,
+  EVENT_LANE_HEIGHT,
   PIXELS_PER_YEAR,
   ROW_HEIGHT,
+  TIMELINE_HEIGHT,
   TOP_OFFSET,
 } from "../utils/constants";
 import type { King } from "../types/King";
 import { yearToX } from "../utils/coords";
-import { useAtomValue } from "jotai";
-import { activeYearAtom } from "../state/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
+import { activeYearAtom, selectionAtom } from "../state/atoms";
 import { Fragment } from "react";
+import Events from "./Events";
 
 const Timeline = () => {
   const dynasties: Dynasty[] = dynastiesData;
   const kings: King[] = kingsData;
 
-  const svgHeight = (TOP_OFFSET * NUM_DYNASTY_ROWS * ROW_HEIGHT) / 30;
+  const svgHeight = TIMELINE_HEIGHT;
 
   const activeYear = useAtomValue(activeYearAtom);
+  const setSelection = useSetAtom(selectionAtom);
 
   const playheadX = 300;
 
@@ -50,6 +56,8 @@ const Timeline = () => {
           return (
             <Fragment key={dynasty.id}>
               <rect
+                onClick={() => setSelection({ kind: "dynasty", id: dynasty.id })}
+                style={{ cursor: "pointer" }}
                 x={x}
                 y={y}
                 width={width}
@@ -81,7 +89,27 @@ const Timeline = () => {
             </Fragment>
           );
         })}
+        <Events />
       </g>
+
+      {CATEGORY_ORDER.map((category, i) => {
+        const y = EVENT_BAND_TOP + i * EVENT_LANE_HEIGHT;
+        return (
+          <g key={category}>
+            <rect x={0} y={y - 13} width={150} height={22} fill="white" opacity={0.85} />
+            <text
+              x={8}
+              y={y}
+              fontSize="12"
+              fontWeight="600"
+              fill={CATEGORY_META[category].color}
+              dominantBaseline="middle"
+            >
+              {CATEGORY_META[category].label}
+            </text>
+          </g>
+        );
+      })}
     </svg>
   );
 };

@@ -9,3 +9,27 @@ export const EVENT_ROWS_TOP = TOP_OFFSET;
 
 export const ALL_YEARS = Math.abs(MIN_YEAR) + MAX_YEAR;
 export const APP_WIDTH = ALL_YEARS * PIXELS_PER_YEAR;
+
+import type { EventCategory } from "../types/Event";
+
+export const EVENT_BAND_TOP = 720;
+export const EVENT_LANE_HEIGHT = 90;
+export const EVENT_STEM_HEIGHT = 14;
+
+export const CATEGORY_ORDER: EventCategory[] = [
+  "politics-wars",
+  "culture-religion",
+  "science",
+];
+
+export const CATEGORY_META: Record<
+  EventCategory,
+  { label: string; color: string }
+> = {
+  "politics-wars": { label: "Politics & Wars", color: "#B23A48" },
+  "culture-religion": { label: "Culture & Religion", color: "#6A4C93" },
+  science: { label: "Science", color: "#1B998B" },
+};
+
+export const TIMELINE_HEIGHT =
+  EVENT_BAND_TOP + CATEGORY_ORDER.length * EVENT_LANE_HEIGHT;

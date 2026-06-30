@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
 import Timeline from "./components/Timeline";
 import YearAxis from "./components/YearAxis";
+import DetailPanel from "./components/DetailPanel";
 import { activeYearAtom } from "./state/atoms";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       </div>
       <Timeline />
       <YearAxis />
+      <DetailPanel />
     </div>
   );
 }
