@@ -7,8 +7,9 @@ progressively reveals detail. Dynasties and their kings render as nested bars,
 major events as markers in category lanes, and the whole page changes
 atmosphere by era as you move through it.
 
-![Kings of Persia timeline](docs/media/hero.png)
-<!-- TODO: record docs/media/hero.png (or hero.gif) and commit it here. -->
+![The timeline at the Achaemenid era — dynasty bars, king reign segments, and an event bloom in the background](docs/media/hero.png)
+
+![Detail panel for Darius I, with his reign position within the dynasty and bilingual naming](docs/media/detail.png)
 
 ## Highlights
 
