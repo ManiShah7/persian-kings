@@ -57,7 +57,7 @@ const Events = () => {
               y={y - EVENT_STEM_HEIGHT - 2}
               transform={`rotate(-40 ${x + 8} ${y - EVENT_STEM_HEIGHT - 2})`}
               fontSize="11"
-              fill="#333"
+              fill="#cfc9bf"
             >
               {event.yearApprox ? `c. ${event.title}` : event.title}
             </text>

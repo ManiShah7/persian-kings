@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import { xToYear } from "../utils/coords";
 import { DEFAULT_PPS } from "../utils/constants";
+import { eraForYear } from "../data/eras";
 
 // --- Viewport (single source of truth for scroll/pan/zoom) ---
 
@@ -30,6 +31,9 @@ export const centerYearAtom = atom((get) => {
   );
   return year === 0 ? -1 : year;
 });
+
+// Derived — the era containing the centered year.
+export const currentEraAtom = atom((get) => eraForYear(get(centerYearAtom)));
 
 // --- Selection (detail panel) ---
 

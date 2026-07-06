@@ -1,0 +1,118 @@
+import type { Era } from "../types/Era";
+
+// Eras tile MIN_YEAR..MAX_YEAR contiguously; boundaries sit at the great
+// inflection points of Iranian history. Backgrounds are dark, desaturated
+// backdrops so dynasty bars still pop on top.
+export const eras: Era[] = [
+  {
+    id: "median",
+    name: "Rise of the Medes",
+    nameFa: "برآمدن مادها",
+    startYear: -728,
+    endYear: -550,
+    background: { from: "#1a1410", to: "#2b2118" },
+    accent: "#c08552",
+  },
+  {
+    id: "achaemenid",
+    name: "The Achaemenid Empire",
+    nameFa: "شاهنشاهی هخامنشی",
+    startYear: -550,
+    endYear: -330,
+    background: { from: "#1c160a", to: "#332a12" },
+    accent: "#d4a935",
+  },
+  {
+    id: "hellenistic",
+    name: "Hellenistic Interlude",
+    nameFa: "دوران هلنی",
+    startYear: -330,
+    endYear: -247,
+    background: { from: "#131720", to: "#232936" },
+    accent: "#8fa3bf",
+  },
+  {
+    id: "parthian",
+    name: "The Parthian Era",
+    nameFa: "دوران اشکانی",
+    startYear: -247,
+    endYear: 224,
+    background: { from: "#181410", to: "#2e2418" },
+    accent: "#c8873c",
+  },
+  {
+    id: "sasanian",
+    name: "The Sasanian Empire",
+    nameFa: "شاهنشاهی ساسانی",
+    startYear: 224,
+    endYear: 651,
+    background: { from: "#1c0d10", to: "#33161c" },
+    accent: "#d94f5c",
+  },
+  {
+    id: "conquest",
+    name: "The Islamic Conquest",
+    nameFa: "فتح اسلامی",
+    startYear: 651,
+    endYear: 821,
+    background: { from: "#121212", to: "#242424" },
+    accent: "#9a9a9a",
+  },
+  {
+    id: "intermezzo",
+    name: "The Iranian Intermezzo",
+    nameFa: "میان‌پرده ایرانی",
+    startYear: 821,
+    endYear: 1037,
+    background: { from: "#0e1a17", to: "#1c332c" },
+    accent: "#3fae8f",
+  },
+  {
+    id: "turkic",
+    name: "Turks & the Seljuk Age",
+    nameFa: "ترکان و سلجوقیان",
+    startYear: 1037,
+    endYear: 1219,
+    background: { from: "#0e141f", to: "#1b2739" },
+    accent: "#4f83cc",
+  },
+  {
+    id: "mongol",
+    name: "Mongol Storm & Timurids",
+    nameFa: "یورش مغول و تیموریان",
+    startYear: 1219,
+    endYear: 1501,
+    background: { from: "#16121c", to: "#251d31" },
+    accent: "#8f6fc2",
+  },
+  {
+    id: "safavid",
+    name: "The Safavid Revival",
+    nameFa: "شکوه صفوی",
+    startYear: 1501,
+    endYear: 1789,
+    background: { from: "#0c1710", to: "#17301f" },
+    accent: "#3f9e5f",
+  },
+  {
+    id: "qajar",
+    name: "Qajar Iran",
+    nameFa: "ایران قاجار",
+    startYear: 1789,
+    endYear: 1925,
+    background: { from: "#171020", to: "#2a1d3a" },
+    accent: "#b06ab3",
+  },
+  {
+    id: "pahlavi",
+    name: "The Pahlavi Century",
+    nameFa: "سده پهلوی",
+    startYear: 1925,
+    endYear: 1979,
+    background: { from: "#0d1220", to: "#182340" },
+    accent: "#5b7fd4",
+  },
+];
+
+export const eraForYear = (year: number): Era =>
+  eras.find((e) => year >= e.startYear && year < e.endYear) ?? eras[eras.length - 1];

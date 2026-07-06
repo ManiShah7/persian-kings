@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 import { ppsAtom, visibleRangeAtom } from "../state/atoms";
-import { AXIS_HEIGHT, MAX_YEAR, MIN_YEAR, timelineWidth } from "../utils/constants";
+import { AXIS_HEIGHT, HUD_HEIGHT, MAX_YEAR, MIN_YEAR, timelineWidth } from "../utils/constants";
 import { yearToX } from "../utils/coords";
 import { formatYear } from "../utils/format";
 import { chooseTickStep } from "../utils/ticks";
@@ -21,14 +21,14 @@ const YearAxis = () => {
       className="year-axis"
       width={width}
       height={AXIS_HEIGHT}
-      style={{ position: "absolute", top: 0, left: 0 }}
+      style={{ position: "absolute", top: HUD_HEIGHT, left: 0 }}
     >
       <line
         x1={0}
         x2={width}
         y1={AXIS_HEIGHT - 0.5}
         y2={AXIS_HEIGHT - 0.5}
-        stroke="rgba(0,0,0,0.2)"
+        stroke="rgba(255,255,255,0.18)"
       />
       {ticks.map((year) => {
         const x = yearToX(year, pps);
@@ -39,14 +39,14 @@ const YearAxis = () => {
               x2={x}
               y1={AXIS_HEIGHT - 8}
               y2={AXIS_HEIGHT}
-              stroke="rgba(0,0,0,0.4)"
+              stroke="rgba(255,255,255,0.35)"
             />
             <text
               x={x}
               y={AXIS_HEIGHT - 14}
               textAnchor="middle"
               fontSize={11}
-              fill="#333"
+              fill="#c9c3b8"
             >
               {formatYear(year)}
             </text>

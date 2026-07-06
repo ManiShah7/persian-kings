@@ -5,6 +5,7 @@ export const ROW_GAP = 8; // vertical gap between dynasty lanes
 export const NUM_DYNASTY_ROWS = 5; // rows 0-4
 export const NUM_EVENT_ROWS = 3; // politics-wars, culture-religion, science
 export const AXIS_HEIGHT = 48; // height of the sticky year-axis strip
+export const HUD_HEIGHT = 72; // height of the fixed header HUD
 
 export const ALL_YEARS = Math.abs(MIN_YEAR) + MAX_YEAR;
 
