@@ -1,24 +1,31 @@
 import eventsData from "../data/events.json";
 import type { HistoricalEvent } from "../types/Event";
 import {
-  APP_WIDTH,
   CATEGORY_META,
   CATEGORY_ORDER,
   EVENT_BAND_TOP,
   EVENT_LANE_HEIGHT,
   EVENT_STEM_HEIGHT,
-  PIXELS_PER_YEAR,
+  timelineWidth,
 } from "../utils/constants";
 import { yearToX } from "../utils/coords";
-import { useSetAtom } from "jotai";
-import { selectionAtom } from "../state/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
+import { ppsAtom, selectionAtom, visibleRangeAtom } from "../state/atoms";
+
+const events = eventsData as HistoricalEvent[];
 
 const laneY = (category: HistoricalEvent["category"]) =>
   EVENT_BAND_TOP + CATEGORY_ORDER.indexOf(category) * EVENT_LANE_HEIGHT;
 
 const Events = () => {
-  const events: HistoricalEvent[] = eventsData as HistoricalEvent[];
+  const pps = useAtomValue(ppsAtom);
+  const { startYear, endYear } = useAtomValue(visibleRangeAtom);
   const setSelection = useSetAtom(selectionAtom);
+  const width = timelineWidth(pps);
+
+  const visibleEvents = events.filter(
+    (event) => event.year >= startYear && event.year <= endYear,
+  );
 
   return (
     <g>
@@ -26,7 +33,7 @@ const Events = () => {
         <line
           key={category}
           x1={0}
-          x2={APP_WIDTH}
+          x2={width}
           y1={laneY(category)}
           y2={laneY(category)}
           stroke={CATEGORY_META[category].color}
@@ -34,8 +41,8 @@ const Events = () => {
         />
       ))}
 
-      {events.map((event) => {
-        const x = yearToX(event.year, PIXELS_PER_YEAR);
+      {visibleEvents.map((event) => {
+        const x = yearToX(event.year, pps);
         const y = laneY(event.category);
         const color = CATEGORY_META[event.category].color;
         return (
@@ -44,13 +51,7 @@ const Events = () => {
             onClick={() => setSelection({ kind: "event", id: event.id })}
             style={{ cursor: "pointer" }}
           >
-            <line
-              x1={x}
-              x2={x}
-              y1={y}
-              y2={y - EVENT_STEM_HEIGHT}
-              stroke={color}
-            />
+            <line x1={x} x2={x} y1={y} y2={y - EVENT_STEM_HEIGHT} stroke={color} />
             <circle cx={x} cy={y - EVENT_STEM_HEIGHT} r={4} fill={color} />
             <circle cx={x} cy={y - EVENT_STEM_HEIGHT} r={10} fill="transparent" />
             <text

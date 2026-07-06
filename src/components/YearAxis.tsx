@@ -1,92 +1,59 @@
-import { useAtom } from "jotai";
-import {
-  APP_WIDTH,
-  MAX_YEAR,
-  MIN_YEAR,
-  PIXELS_PER_YEAR,
-} from "../utils/constants";
-import { xToYear, yearToX } from "../utils/coords";
-import { activeYearAtom } from "../state/atoms";
-import YearTick from "./YearTick";
+import { useAtomValue } from "jotai";
+import { ppsAtom, visibleRangeAtom } from "../state/atoms";
+import { AXIS_HEIGHT, MAX_YEAR, MIN_YEAR, timelineWidth } from "../utils/constants";
+import { yearToX } from "../utils/coords";
+import { formatYear } from "../utils/format";
+import { chooseTickStep } from "../utils/ticks";
 
 const YearAxis = () => {
-  const yearStep = 100;
-  const lastTick = Math.trunc(MAX_YEAR / 100) * 100;
-  const firstTick = Math.trunc(MIN_YEAR / 100) * 100;
-  const totalYears = Math.round((lastTick - firstTick) / yearStep + 1);
-  const firstYearX = yearToX(MIN_YEAR, PIXELS_PER_YEAR);
-  const lastYearX = yearToX(MAX_YEAR, PIXELS_PER_YEAR);
+  const pps = useAtomValue(ppsAtom);
+  const { startYear, endYear } = useAtomValue(visibleRangeAtom);
+  const step = chooseTickStep(pps);
+  const width = timelineWidth(pps);
 
-  const [activeYear, setActiveYear] = useAtom(activeYearAtom);
-
-  const ticks = Array.from({ length: totalYears }, (_, i) => {
-    const year = firstTick + i * yearStep;
-    return { year, x: yearToX(year, PIXELS_PER_YEAR) };
-  });
-
-  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const year = xToYear(Number(e.target.value), PIXELS_PER_YEAR);
-
-    setActiveYear(Math.round(year));
-  };
-
-  const playheadX = 300;
-
-  const maxOffset = APP_WIDTH - window.innerWidth;
-  const svgOffsetX = Math.min(
-    Math.max(0, yearToX(activeYear, PIXELS_PER_YEAR) - playheadX),
-    maxOffset,
-  );
+  const first = Math.ceil(Math.max(MIN_YEAR, startYear) / step) * step;
+  const last = Math.min(MAX_YEAR, endYear);
+  const ticks: number[] = [];
+  for (let year = first; year <= last; year += step) ticks.push(year);
 
   return (
-    <>
-      <div
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          width: "100%",
-          height: "40px",
-        }}
-      >
-        <div
-          style={{
-            transform: `translate(${-svgOffsetX}px)`,
-            width: `${APP_WIDTH}px`,
-
-            backgroundColor: "black",
-            height: "1px",
-            marginTop: "5px",
-          }}
-        >
-          {activeYear}
-
-          <YearTick x={firstYearX} year={MIN_YEAR} />
-
-          {ticks.map((tick) => (
-            <YearTick key={tick.year} x={tick.x} year={tick.year} />
-          ))}
-
-          <YearTick x={lastYearX} year={MAX_YEAR} />
-        </div>
-      </div>
-
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          marginTop: "50px",
-        }}
-      >
-        <input
-          type="range"
-          min={firstYearX}
-          max={lastYearX}
-          value={yearToX(activeYear, PIXELS_PER_YEAR)}
-          style={{ width: "100%", marginTop: "20px" }}
-          onChange={handleRangeChange}
-        />
-      </div>
-    </>
+    <svg
+      className="year-axis"
+      width={width}
+      height={AXIS_HEIGHT}
+      style={{ position: "absolute", top: 0, left: 0 }}
+    >
+      <line
+        x1={0}
+        x2={width}
+        y1={AXIS_HEIGHT - 0.5}
+        y2={AXIS_HEIGHT - 0.5}
+        stroke="rgba(0,0,0,0.2)"
+      />
+      {ticks.map((year) => {
+        const x = yearToX(year, pps);
+        return (
+          <g key={year}>
+            <line
+              x1={x}
+              x2={x}
+              y1={AXIS_HEIGHT - 8}
+              y2={AXIS_HEIGHT}
+              stroke="rgba(0,0,0,0.4)"
+            />
+            <text
+              x={x}
+              y={AXIS_HEIGHT - 14}
+              textAnchor="middle"
+              fontSize={11}
+              fill="#333"
+            >
+              {formatYear(year)}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
   );
 };
 

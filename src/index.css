@@ -2,3 +2,12 @@ body {
   margin: 0;
   overflow-x: hidden;
 }
+
+.scroll-container {
+  cursor: grab;
+}
+
+.scroll-container[data-dragging="true"] {
+  cursor: grabbing;
+  user-select: none;
+}

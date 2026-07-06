@@ -1,14 +1,24 @@
 export const MIN_YEAR = -728; // earliest year on timeline (Median start)
 export const MAX_YEAR = 1979; // latest year (Pahlavi end)
-export const PIXELS_PER_YEAR = 3; // horizontal scale
-export const ROW_HEIGHT = 60; // height of each lane
+export const ROW_HEIGHT = 60; // height of each dynasty lane
+export const ROW_GAP = 8; // vertical gap between dynasty lanes
 export const NUM_DYNASTY_ROWS = 5; // rows 0-4
 export const NUM_EVENT_ROWS = 3; // politics-wars, culture-religion, science
-export const TOP_OFFSET = 80; // space at top for the year ticker
-export const EVENT_ROWS_TOP = TOP_OFFSET;
+export const AXIS_HEIGHT = 48; // height of the sticky year-axis strip
 
 export const ALL_YEARS = Math.abs(MIN_YEAR) + MAX_YEAR;
-export const APP_WIDTH = ALL_YEARS * PIXELS_PER_YEAR;
+
+// Zoom (pixels per year) bounds. pps is dynamic state, not a fixed constant.
+export const DEFAULT_PPS = 3;
+export const MIN_PPS = 0.4; // ~fit-everything on a laptop screen
+export const MAX_PPS = 24; // one year ≈ 24px, comfortable king-label zoom
+
+// Full timeline width in px at a given zoom.
+export const timelineWidth = (pps: number): number => ALL_YEARS * pps;
+
+// Vertical position of a dynasty lane by its row index.
+export const laneY = (row: number): number =>
+  AXIS_HEIGHT + row * (ROW_HEIGHT + ROW_GAP);
 
 import type { EventCategory } from "../types/Event";
 
