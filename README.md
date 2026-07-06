@@ -17,12 +17,20 @@ atmosphere by era as you move through it.
 - **Era atmosphere** — a full-viewport background that crossfades between 12
   era palettes (Achaemenid golds → Sasanian crimson → Safavid greens →
   Pahlavi navy…) as the centered year moves.
+- **Event atmosphere** — each event blooms its category color into the
+  background as the centered year scrolls past it; nearby events blend and the
+  glow peaks at screen center.
 - **Level-of-detail rendering** — zoomed out shows clean dynasty bars; zooming
   in reveals individual king reign segments, then their names and dates.
+  Dense events cluster into count bubbles that zoom apart on click.
+- **Detail panels** — click any dynasty, king, or event for facts, dates, and
+  Farsi names; dynasty panels plot the capital on an abstract map and drill
+  down into individual rulers.
 - **Bilingual (EN / FA)** — every name/title carries its Persian form,
   rendered right-to-left in the Vazirmatn typeface.
 - **Virtualized SVG** — only elements intersecting the viewport mount, so the
-  full 2,700-year span stays smooth.
+  full 2,700-year span stays smooth; half-viewport gutters let the first and
+  last years scroll all the way to center.
 - **Shareable URLs** — the current year, zoom, and open panel are written to
   the URL; opening that link restores the exact view.
 - **Accessible** — keyboard-operable timeline, focusable/labeled elements,
@@ -45,12 +53,17 @@ the app and always goes through `src/utils/coords.ts`.
 ```
 viewport atoms                derived atoms                 components
 ──────────────                ─────────────                 ──────────
-ppsAtom (zoom)        ┐
-scrollXAtom           ├─►  visibleRangeAtom  ──►  Timeline / Events (virtualized)
-viewportWidthAtom     ┘    centerYearAtom    ──►  HeaderHUD
-                           currentEraAtom    ──►  EraBackground
-selectionAtom         ─────────────────────►     DetailPanel
+ppsAtom (zoom)        ┐    ┌─ visibleRangeAtom ──►  Timeline / Events (virtualized)
+scrollXAtom           ├────┼─ centerYearAtom   ──►  HeaderHUD
+viewportWidthAtom     ┘    └─ currentEraAtom   ──►  EraBackground
+scrollXAtom + ppsAtom ─────────────────────────►    EventAtmosphere
+selectionAtom         ─────────────────────────►    DetailPanel
 ```
+
+The content is padded with a half-viewport gutter on each side, which makes
+`centerYearAtom` collapse to `xToYear(scrollX)` — scrollLeft 0 maps to the
+first year, `timelineWidth` to the last, so any year (including the extremes)
+can be centered.
 
 - `useTimelineViewport` owns all scroll/wheel/drag/keyboard wiring and the
   URL read/write, and exposes a `zoomToYear` action via `ViewportContext`.
