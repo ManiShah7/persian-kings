@@ -17,6 +17,11 @@ const DRAG_THRESHOLD = 4; // px before a pointer press counts as a drag
 const KEYBOARD_ZOOM_FACTOR = 1.2;
 const URL_WRITE_DEBOUNCE_MS = 300;
 
+// Total scroll-content width: the timeline plus a half-viewport gutter on each
+// side (2 × half = one viewport) so the extreme years can be centered.
+const contentWidth = (pps: number, viewportWidth: number): string =>
+  `${timelineWidth(pps) + viewportWidth}px`;
+
 /**
  * Owns every wiring concern of the native scroll viewport: scroll→atom,
  * resize→atom, wheel pan/zoom, drag-to-pan, and keyboard nav. Returns a ref
@@ -48,9 +53,10 @@ export function useTimelineViewport() {
     const params = parseViewParams(window.location.search);
     const initPps = params.pps ?? ppsRef.current;
     const content = el.firstElementChild as HTMLElement | null;
-    if (content) content.style.width = `${timelineWidth(initPps)}px`;
+    if (content) content.style.width = contentWidth(initPps, el.clientWidth);
     if (params.year !== undefined) {
-      el.scrollLeft = yearToX(params.year, initPps) - el.clientWidth / 2;
+      // Gutter makes scrollLeft = yearToX(year) center that year.
+      el.scrollLeft = yearToX(params.year, initPps);
     }
     if (params.pps !== undefined) {
       ppsRef.current = initPps;
@@ -84,8 +90,8 @@ export function useTimelineViewport() {
       if (!el) return;
       const content = el.firstElementChild as HTMLElement | null;
       const newPps = clamp(targetPps, MIN_PPS, MAX_PPS);
-      if (content) content.style.width = `${timelineWidth(newPps)}px`;
-      el.scrollLeft = yearToX(year, newPps) - el.clientWidth / 2;
+      if (content) content.style.width = contentWidth(newPps, el.clientWidth);
+      el.scrollLeft = yearToX(year, newPps);
       ppsRef.current = newPps;
       setPps(newPps);
       setScrollX(el.scrollLeft);
@@ -104,11 +110,12 @@ export function useTimelineViewport() {
       const newPps = clamp(oldPps * factor, MIN_PPS, MAX_PPS);
       if (newPps === oldPps) return;
 
-      const anchorYear = xToYear(el.scrollLeft + pointerOffsetX, oldPps);
+      const gutter = el.clientWidth / 2;
+      const anchorYear = xToYear(el.scrollLeft + pointerOffsetX - gutter, oldPps);
       // Widen/narrow the content *before* assigning scrollLeft, else the
       // browser clamps the new scrollLeft against the old (stale) width.
-      if (content) content.style.width = `${timelineWidth(newPps)}px`;
-      el.scrollLeft = yearToX(anchorYear, newPps) - pointerOffsetX;
+      if (content) content.style.width = contentWidth(newPps, el.clientWidth);
+      el.scrollLeft = gutter + yearToX(anchorYear, newPps) - pointerOffsetX;
 
       ppsRef.current = newPps;
       setPps(newPps);

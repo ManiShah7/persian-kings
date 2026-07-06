@@ -7,7 +7,7 @@ import {
   timelineWidth,
 } from "../utils/constants";
 import { useAtomValue } from "jotai";
-import { ppsAtom, scrollXAtom, visibleRangeAtom } from "../state/atoms";
+import { ppsAtom, scrollXAtom, viewportWidthAtom, visibleRangeAtom } from "../state/atoms";
 import { dynasties, kingsByDynasty } from "../data";
 import { color, font, radius, text } from "../theme/tokens";
 import DynastyBar from "./DynastyBar";
@@ -16,15 +16,22 @@ import Events from "./Events";
 const Timeline = () => {
   const pps = useAtomValue(ppsAtom);
   const scrollX = useAtomValue(scrollXAtom);
+  const gutter = useAtomValue(viewportWidthAtom) / 2;
   const { startYear, endYear } = useAtomValue(visibleRangeAtom);
   const width = timelineWidth(pps);
+  // SVG-internal x that currently sits at the viewport's left edge.
+  const viewportLeftX = scrollX - gutter;
 
   const visibleDynasties = dynasties.filter(
     (d) => d.endYear >= startYear && d.startYear <= endYear,
   );
 
   return (
-    <svg width={width} height={TIMELINE_HEIGHT} style={{ display: "block" }}>
+    <svg
+      width={width}
+      height={TIMELINE_HEIGHT}
+      style={{ display: "block", marginLeft: gutter }}
+    >
       <defs>
         {/* Foreign-rule marker: shared diagonal hatch overlaid on the header. */}
         <pattern
@@ -52,7 +59,7 @@ const Timeline = () => {
       {CATEGORY_ORDER.map((category, i) => {
         const y = EVENT_BAND_TOP + i * EVENT_LANE_HEIGHT;
         return (
-          <g key={category} transform={`translate(${scrollX + 12},0)`}>
+          <g key={category} transform={`translate(${viewportLeftX + 12},0)`}>
             <rect
               x={0}
               y={y - 13}

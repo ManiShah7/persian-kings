@@ -94,6 +94,12 @@ export const normalizeDynastyColor = (hex: string): string => {
   );
 };
 
+/** Convert a hex color to an `rgba(...)` string with the given alpha. */
+export const withAlpha = (hex: string, alpha: number): string => {
+  const { r, g, b } = hexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
 /** Pick a near-white or near-black text color for legibility over `hex`. */
 export const contrastText = (hex: string): string => {
   const { r, g, b } = hexToRgb(hex);
