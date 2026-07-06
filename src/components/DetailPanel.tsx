@@ -9,6 +9,7 @@ import { color, font, radius, shadow, text, z } from "../theme/tokens";
 import { normalizeDynastyColor } from "../utils/color";
 import { formatRange, formatYear } from "../utils/format";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import CapitalMap from "./CapitalMap";
 
 const Field = ({ label, value }: { label: string; value: string }) => (
   <div style={{ marginBottom: 12 }}>
@@ -178,6 +179,7 @@ const PanelBody = () => {
             )}
           />
           <Field label="Capital" value={dynasty.capital.name} />
+          <CapitalMap dynasty={dynasty} accent={accent} />
           {rulers.length > 0 && (
             <div style={{ marginBottom: 12 }}>
               <div style={eyebrowStyle}>Rulers</div>

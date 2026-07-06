@@ -16,6 +16,7 @@ import { yearToX } from "../utils/coords";
 import { clamp } from "../utils/clamp";
 import { contrastText, normalizeDynastyColor, shadeColor } from "../utils/color";
 import { formatRange } from "../utils/format";
+import { onActivate } from "../utils/a11y";
 
 const CONTAINER_HEIGHT = ROW_HEIGHT - 4;
 const REIGN_STRIP_HEIGHT = CONTAINER_HEIGHT - DYNASTY_HEADER_HEIGHT;
@@ -88,6 +89,7 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
         style={{ cursor: "pointer" }}
       />
       <rect
+        className="timeline-focusable"
         x={barX}
         y={y}
         width={barWidth}
@@ -95,6 +97,15 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
         rx={4}
         fill={baseColor}
         onClick={selectDynasty}
+        onKeyDown={onActivate(selectDynasty)}
+        tabIndex={0}
+        role="button"
+        aria-label={`${dynasty.name}${dynasty.foreignRule ? ", foreign rule" : ""}, ${formatRange(
+          dynasty.startYear,
+          dynasty.endYear,
+          dynasty.startYearApprox,
+          dynasty.endYearApprox,
+        )}`}
         style={{ cursor: "pointer" }}
       />
       {dynasty.foreignRule && (
@@ -132,14 +143,22 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
               lines: [`Reigned ${range}`, firstWords(king.deathCause, 6)],
             },
           };
+          const selectKing = () => setSelection({ kind: "king", id: king.id });
           return (
             <g
               key={king.id}
+              className="timeline-focusable"
+              tabIndex={0}
+              role="button"
+              aria-label={`${king.name}, reigned ${range}${
+                dynasty.name ? `, ${dynasty.name} dynasty` : ""
+              }`}
               style={{ cursor: "pointer" }}
               onClick={(e) => {
                 e.stopPropagation();
-                setSelection({ kind: "king", id: king.id });
+                selectKing();
               }}
+              onKeyDown={onActivate(selectKing)}
               onPointerEnter={(e) => setTooltip({ ...tooltip, x: e.clientX, y: e.clientY })}
               onPointerMove={(e) => setTooltip({ ...tooltip, x: e.clientX, y: e.clientY })}
               onPointerLeave={() => setTooltip(null)}

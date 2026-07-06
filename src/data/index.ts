@@ -9,6 +9,20 @@ export const dynasties = dynastiesData as Dynasty[];
 export const kings = kingsData as King[];
 export const events = eventsData as HistoricalEvent[];
 
+export type SelectionRef = { kind: "dynasty" | "king" | "event"; id: string };
+
+/** Whether a selection ref points at a real entity (for URL restore). */
+export const selectionExists = (sel: SelectionRef): boolean => {
+  switch (sel.kind) {
+    case "dynasty":
+      return dynasties.some((d) => d.id === sel.id);
+    case "king":
+      return kings.some((k) => k.id === sel.id);
+    case "event":
+      return events.some((e) => e.id === sel.id);
+  }
+};
+
 // Kings grouped by their dynasty, each list sorted chronologically.
 export const kingsByDynasty: Map<string, King[]> = (() => {
   const map = new Map<string, King[]>();

@@ -17,6 +17,7 @@ import { ppsAtom, selectionAtom, tooltipAtom, visibleRangeAtom } from "../state/
 import { events } from "../data";
 import { clusterEvents } from "../utils/cluster";
 import { formatYear } from "../utils/format";
+import { onActivate } from "../utils/a11y";
 import { useViewportApi } from "../state/viewportContext";
 
 const laneY = (category: HistoricalEvent["category"]) =>
@@ -64,13 +65,20 @@ const Events = () => {
           <g key={`events-${category}`}>
             {clusters.map((cluster) => {
               if (cluster.events.length > 1) {
+                const zoomToCluster = () =>
+                  viewport?.zoomToYear(cluster.year, Math.min(pps * EVENT_CLUSTER_ZOOM, MAX_PPS));
                 return (
                   <g
                     key={`cluster-${category}-${cluster.year}`}
+                    className="timeline-focusable"
+                    tabIndex={0}
+                    role="button"
+                    aria-label={`${cluster.events.length} ${cat.label} events near ${formatYear(
+                      cluster.year,
+                    )}, activate to zoom in`}
                     style={{ cursor: "zoom-in" }}
-                    onClick={() =>
-                      viewport?.zoomToYear(cluster.year, Math.min(pps * EVENT_CLUSTER_ZOOM, MAX_PPS))
-                    }
+                    onClick={zoomToCluster}
+                    onKeyDown={onActivate(zoomToCluster)}
                   >
                     <circle cx={cluster.x} cy={dotY} r={9} fill={cat.color} />
                     <text
@@ -92,11 +100,17 @@ const Events = () => {
 
               const event = cluster.events[0];
               const x = cluster.x;
+              const selectEvent = () => setSelection({ kind: "event", id: event.id });
               return (
                 <g
                   key={event.id}
+                  className="timeline-focusable"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${event.title}, ${formatYear(event.year, event.yearApprox)}, ${cat.label}`}
                   style={{ cursor: "pointer" }}
-                  onClick={() => setSelection({ kind: "event", id: event.id })}
+                  onClick={selectEvent}
+                  onKeyDown={onActivate(selectEvent)}
                   onPointerEnter={(e) =>
                     setTooltip({
                       content: { title: event.title, titleFa: event.titleFa, lines: eventLines(event) },

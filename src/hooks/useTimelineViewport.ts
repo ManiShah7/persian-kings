@@ -1,12 +1,21 @@
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useCallback, useEffect, useRef } from "react";
-import { ppsAtom, scrollXAtom, viewportWidthAtom } from "../state/atoms";
+import {
+  centerYearAtom,
+  ppsAtom,
+  scrollXAtom,
+  selectionAtom,
+  viewportWidthAtom,
+} from "../state/atoms";
 import { MAX_PPS, MIN_PPS, timelineWidth } from "../utils/constants";
 import { xToYear, yearToX } from "../utils/coords";
 import { clamp } from "../utils/clamp";
+import { parseViewParams, serializeViewParams } from "../utils/urlState";
+import { selectionExists } from "../data";
 
 const DRAG_THRESHOLD = 4; // px before a pointer press counts as a drag
 const KEYBOARD_ZOOM_FACTOR = 1.2;
+const URL_WRITE_DEBOUNCE_MS = 300;
 
 /**
  * Owns every wiring concern of the native scroll viewport: scroll→atom,
@@ -20,6 +29,8 @@ export function useTimelineViewport() {
   const [pps, setPps] = useAtom(ppsAtom);
   const setScrollX = useSetAtom(scrollXAtom);
   const setViewportWidth = useSetAtom(viewportWidthAtom);
+  const [selection, setSelection] = useAtom(selectionAtom);
+  const centerYear = useAtomValue(centerYearAtom);
 
   // Mirror pps so event handlers read the latest value without re-binding.
   const ppsRef = useRef(pps);
@@ -29,6 +40,29 @@ export function useTimelineViewport() {
 
   const rafScroll = useRef<number | null>(null);
   const latestScroll = useRef(0);
+
+  // Restore view + selection from the URL once, before first meaningful paint.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const params = parseViewParams(window.location.search);
+    const initPps = params.pps ?? ppsRef.current;
+    const content = el.firstElementChild as HTMLElement | null;
+    if (content) content.style.width = `${timelineWidth(initPps)}px`;
+    if (params.year !== undefined) {
+      el.scrollLeft = yearToX(params.year, initPps) - el.clientWidth / 2;
+    }
+    if (params.pps !== undefined) {
+      ppsRef.current = initPps;
+      setPps(initPps);
+    }
+    if (params.sel && selectionExists(params.sel)) {
+      setSelection(params.sel);
+    }
+    setScrollX(el.scrollLeft);
+    // Run once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const flushScroll = useCallback(
     (value: number) => {
@@ -228,6 +262,16 @@ export function useTimelineViewport() {
     el.addEventListener("keydown", onKeyDown);
     return () => el.removeEventListener("keydown", onKeyDown);
   }, [applyZoom]);
+
+  // Write the current view + selection back to the URL, debounced, so a copied
+  // link restores the exact view. replaceState only — never history spam.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const qs = serializeViewParams(centerYear, pps, selection);
+      window.history.replaceState(null, "", `?${qs}`);
+    }, URL_WRITE_DEBOUNCE_MS);
+    return () => clearTimeout(t);
+  }, [centerYear, pps, selection]);
 
   return { containerRef, zoomToYear };
 }

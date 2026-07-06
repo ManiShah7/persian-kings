@@ -78,17 +78,19 @@ The app works but is mid-refactor. Be aware:
 ## Roadmap (priority order)
 
 > **Detailed execution plan lives in `docs/plan/`** (README + one file per
-> phase). When implementing, follow those phase docs — they supersede the
-> summary below.
+> phase). The five-phase plan there has been implemented — see the phase docs
+> for the spec behind each area.
 
-1. **Render events** — wire `events.json` into the three category lanes; add an
-   `Event` type.
-2. **Detail panel** — click a dynasty / king / event to open a panel with its facts,
-   dates, capital, death cause, etc.
-3. **Map of capitals** — use each dynasty's `capital` lat/lng to plot capitals on a map.
-4. **Visual / styling polish** — replace placeholder styling with a deliberate,
-   professional design.
-5. **Free scroll/pan + zoom navigation** (see above) — underpins the interaction model.
+1. ~~**Render events**~~ — done; events render as clustered markers in three
+   category lanes with an `Event` type.
+2. ~~**Detail panel**~~ — done; clicking a dynasty / king / event opens a
+   restyled panel (facts, dates, capital map, reign bar, drill-down).
+3. ~~**Map of capitals**~~ — done; `CapitalMap` plots capitals from lat/lng in
+   the dynasty panel (`src/utils/geo.ts`).
+4. ~~**Visual / styling polish**~~ — done; design tokens, self-hosted fonts,
+   era atmosphere, dark theme (`src/theme/tokens.ts`).
+5. ~~**Free scroll/pan + zoom navigation**~~ — done; native scroll +
+   cursor-anchored zoom via `useTimelineViewport`; the slider/playhead is gone.
 
 ## Conventions
 

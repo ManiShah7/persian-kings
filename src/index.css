@@ -39,8 +39,16 @@ body {
   outline-offset: 2px;
 }
 
-/* SVG elements get the focus ring as a stroke via their own rules; the default
-   outline is fine for HTML controls. */
+/* Focusable timeline SVG elements (dynasty headers, king segments, event
+   markers) get the same keyboard focus ring. */
+.timeline-focusable {
+  outline: none;
+}
+
+.timeline-focusable:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
 
 /* --- Timeline scroll container --- */
 
