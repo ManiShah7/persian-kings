@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
 import { centerYearAtom, currentEraAtom } from "../state/atoms";
 import { HUD_HEIGHT } from "../utils/constants";
+import { color, font, text, z } from "../theme/tokens";
 import { formatYear } from "../utils/format";
 
 const HeaderHUD = () => {
@@ -22,19 +23,20 @@ const HeaderHUD = () => {
         background: "rgba(10,10,12,0.55)",
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-        color: "#e8e4dc",
-        zIndex: 20,
+        borderBottom: `1px solid ${color.line}`,
+        color: color.ink,
+        zIndex: z.hud,
       }}
     >
       <div
         style={{
           flex: 1,
-          fontSize: 13,
-          letterSpacing: "0.22em",
+          fontFamily: font.latin,
+          fontSize: text.md,
+          letterSpacing: "0.2em",
           textTransform: "uppercase",
           fontWeight: 600,
-          color: "#c9c3b8",
+          color: color.inkDim,
         }}
       >
         Kings of Persia
@@ -42,31 +44,37 @@ const HeaderHUD = () => {
 
       <div
         style={{
-          textAlign: "center",
           display: "inline-flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 2,
+          gap: 3,
           borderBottom: `2px solid ${era.accent}`,
           paddingBottom: 4,
           transition: "border-color 400ms ease",
         }}
       >
-        <div style={{ fontSize: 28, fontWeight: 700, lineHeight: 1 }}>
+        <div
+          style={{
+            fontFamily: font.ui,
+            fontSize: text.hud,
+            fontWeight: 700,
+            lineHeight: 1,
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
           {formatYear(centerYear)}
         </div>
         <div
           style={{
-            fontSize: 12,
-            color: era.accent,
-            transition: "color 400ms ease",
+            fontSize: text.sm,
             display: "flex",
             gap: 8,
             alignItems: "baseline",
+            transition: "color 400ms ease",
           }}
         >
-          <span>{era.name}</span>
-          <span dir="rtl" className="fa" style={{ color: "#a39d92" }}>
+          <span style={{ color: era.accent }}>{era.name}</span>
+          <span dir="rtl" className="fa" style={{ color: color.inkDim }}>
             {era.nameFa}
           </span>
         </div>

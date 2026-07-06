@@ -1,11 +1,53 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --ink: #e8e4dc;
+  --ink-dim: #a39d92;
+  --line: rgba(255, 255, 255, 0.08);
+  --accent-gold: #d4a935;
+}
+
+html,
 body {
   margin: 0;
+  height: 100%;
   overflow-x: hidden;
-  color: #e8e4dc;
 }
+
+body {
+  color: var(--ink);
+  font-family: "Inter Variable", system-ui, sans-serif;
+  background: #0c0a08;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fa {
+  font-family: "Vazirmatn Variable", Tahoma, sans-serif;
+}
+
+::selection {
+  background: rgba(212, 169, 53, 0.35);
+}
+
+/* Visible focus rings, but only for keyboard users. */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+/* SVG elements get the focus ring as a stroke via their own rules; the default
+   outline is fine for HTML controls. */
+
+/* --- Timeline scroll container --- */
 
 .scroll-container {
   cursor: grab;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
 }
 
 .scroll-container[data-dragging="true"] {
@@ -13,10 +55,107 @@ body {
   user-select: none;
 }
 
+.scroll-container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: padding-box;
+}
+
+/* --- King segments --- */
+
 .king-segment {
   transition: filter 120ms ease;
 }
 
 .king-segment:hover {
   filter: brightness(1.18);
+}
+
+/* --- Detail panel --- */
+
+@keyframes panel-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.detail-panel {
+  animation: panel-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.detail-panel.no-motion {
+  animation: none;
+}
+
+.panel-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink-dim);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+}
+
+.panel-close:hover {
+  color: var(--ink);
+}
+
+.ruler-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin: 1px 0;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.ruler-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.back-link {
+  background: transparent;
+  border: none;
+  color: var(--ink-dim);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 0 12px;
+}
+
+.back-link:hover {
+  color: var(--ink);
 }

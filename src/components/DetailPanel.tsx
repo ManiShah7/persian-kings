@@ -1,20 +1,24 @@
+import { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import { selectionAtom } from "../state/atoms";
 import { dynasties, events, kings } from "../data";
+import type { Dynasty } from "../types/Dynasty";
+import type { King } from "../types/King";
 import { CATEGORY_META } from "../utils/constants";
+import { color, font, radius, shadow, text, z } from "../theme/tokens";
+import { normalizeDynastyColor } from "../utils/color";
 import { formatRange, formatYear } from "../utils/format";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 const Field = ({ label, value }: { label: string; value: string }) => (
-  <div style={{ marginBottom: 10 }}>
-    <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 0.5, color: "#888" }}>
-      {label}
-    </div>
-    <div style={{ fontSize: 15, color: "#1a1a1a" }}>{value}</div>
+  <div style={{ marginBottom: 12 }}>
+    <div style={eyebrowStyle}>{label}</div>
+    <div style={{ fontSize: text.md, color: color.ink }}>{value}</div>
   </div>
 );
 
 const Facts = ({ facts }: { facts: string[] }) => (
-  <ul style={{ margin: "8px 0 0", paddingLeft: 18, color: "#333", lineHeight: 1.5 }}>
+  <ul style={{ margin: "10px 0 0", paddingLeft: 18, color: color.inkDim, lineHeight: 1.55 }}>
     {facts.map((fact, i) => (
       <li key={i} style={{ marginBottom: 6 }}>
         {fact}
@@ -22,6 +26,14 @@ const Facts = ({ facts }: { facts: string[] }) => (
     ))}
   </ul>
 );
+
+const eyebrowStyle: React.CSSProperties = {
+  fontSize: text.xs,
+  textTransform: "uppercase",
+  letterSpacing: 0.6,
+  color: color.inkFaint,
+  fontFamily: font.ui,
+};
 
 const Header = ({
   accent,
@@ -36,126 +48,259 @@ const Header = ({
   nameFa: string;
   subtitle: string;
 }) => (
-  <div style={{ borderLeft: `4px solid ${accent}`, paddingLeft: 12, marginBottom: 20 }}>
-    <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1, color: accent, fontWeight: 700 }}>
+  <div style={{ borderLeft: `3px solid ${accent}`, paddingLeft: 14, marginBottom: 22 }}>
+    <div style={{ ...eyebrowStyle, color: accent, fontWeight: 700, letterSpacing: 1 }}>
       {eyebrow}
     </div>
-    <h2 style={{ margin: "4px 0 2px", fontSize: 22, color: "#111" }}>{name}</h2>
-    <div dir="rtl" style={{ fontSize: 16, color: "#666" }}>
+    <h2
+      style={{
+        margin: "5px 0 2px",
+        fontFamily: font.latin,
+        fontSize: text.xl,
+        fontWeight: 600,
+        color: color.ink,
+      }}
+    >
+      {name}
+    </h2>
+    <div dir="rtl" className="fa" style={{ fontSize: text.lg, color: color.inkDim }}>
       {nameFa}
     </div>
-    <div style={{ fontSize: 14, color: "#444", marginTop: 6 }}>{subtitle}</div>
+    <div style={{ fontSize: text.md, color: color.inkDim, marginTop: 6 }}>{subtitle}</div>
   </div>
 );
 
-const DetailPanel = () => {
+/** Slim track showing the king's reign within its dynasty's full span. */
+const ReignBar = ({
+  dynasty,
+  king,
+  accent,
+}: {
+  dynasty: Dynasty;
+  king: King;
+  accent: string;
+}) => {
+  const span = dynasty.endYear - dynasty.startYear || 1;
+  const left = Math.max(0, ((king.startYear - dynasty.startYear) / span) * 100);
+  const width = Math.min(100 - left, ((king.endYear - king.startYear) / span) * 100);
+  return (
+    <div style={{ margin: "4px 0 20px" }}>
+      <div
+        style={{
+          position: "relative",
+          height: 8,
+          borderRadius: radius.sm,
+          background: color.line,
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            left: `${left}%`,
+            width: `${Math.max(width, 1.5)}%`,
+            top: 0,
+            bottom: 0,
+            background: accent,
+            borderRadius: radius.sm,
+          }}
+        />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: text.xs,
+          color: color.inkFaint,
+          marginTop: 4,
+        }}
+      >
+        <span>{formatYear(dynasty.startYear, dynasty.startYearApprox)}</span>
+        <span>{formatYear(dynasty.endYear, dynasty.endYearApprox)}</span>
+      </div>
+    </div>
+  );
+};
+
+const PanelBody = () => {
   const [selection, setSelection] = useAtom(selectionAtom);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const restoreFocusRef = useRef<HTMLElement | null>(null);
+  const reducedMotion = usePrefersReducedMotion();
+  const [drill, setDrill] = useState<{ kingId: string; dynastyId: string } | null>(null);
+
+  // Focus lands in the panel on open; focus is restored on close.
+  useEffect(() => {
+    restoreFocusRef.current = document.activeElement as HTMLElement | null;
+    panelRef.current?.focus();
+    return () => restoreFocusRef.current?.focus?.();
+  }, []);
+
+  // Close on Escape and on pointer-down outside the panel.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelection(null);
+    };
+    const onDown = (e: PointerEvent) => {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        setSelection(null);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onDown);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onDown);
+    };
+  }, [setSelection]);
+
   if (!selection) return null;
 
-  let body: React.ReactNode;
+  let body: React.ReactNode = null;
 
   if (selection.kind === "dynasty") {
     const dynasty = dynasties.find((d) => d.id === selection.id);
-    if (!dynasty) return null;
-    const rulers = kings.filter((k) => k.dynastyId === dynasty.id);
-    body = (
-      <>
-        <Header
-          accent={dynasty.color}
-          eyebrow={dynasty.foreignRule ? "Dynasty · Foreign rule" : "Dynasty"}
-          name={dynasty.name}
-          nameFa={dynasty.nameFa}
-          subtitle={formatRange(
-            dynasty.startYear,
-            dynasty.endYear,
-            dynasty.startYearApprox,
-            dynasty.endYearApprox,
+    if (dynasty) {
+      const accent = normalizeDynastyColor(dynasty.color);
+      const rulers = kings.filter((k) => k.dynastyId === dynasty.id);
+      body = (
+        <>
+          <Header
+            accent={accent}
+            eyebrow={dynasty.foreignRule ? "Dynasty · Foreign rule" : "Dynasty"}
+            name={dynasty.name}
+            nameFa={dynasty.nameFa}
+            subtitle={formatRange(
+              dynasty.startYear,
+              dynasty.endYear,
+              dynasty.startYearApprox,
+              dynasty.endYearApprox,
+            )}
+          />
+          <Field label="Capital" value={dynasty.capital.name} />
+          {rulers.length > 0 && (
+            <div style={{ marginBottom: 12 }}>
+              <div style={eyebrowStyle}>Rulers</div>
+              <div style={{ marginTop: 6 }}>
+                {rulers.map((k) => (
+                  <button
+                    key={k.id}
+                    className="ruler-row"
+                    onClick={() => {
+                      setDrill({ kingId: k.id, dynastyId: dynasty.id });
+                      setSelection({ kind: "king", id: k.id });
+                    }}
+                  >
+                    <span>{k.name}</span>
+                    <span style={{ color: color.inkFaint, fontSize: text.xs }}>
+                      {formatRange(k.startYear, k.endYear, k.startYearApprox, k.endYearApprox)}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
-        />
-        <Field label="Capital" value={dynasty.capital.name} />
-        {rulers.length > 0 && (
-          <Field label="Rulers" value={rulers.map((k) => k.name).join(", ")} />
-        )}
-        <Facts facts={dynasty.facts} />
-      </>
-    );
+          <Facts facts={dynasty.facts} />
+        </>
+      );
+    }
   } else if (selection.kind === "king") {
     const king = kings.find((k) => k.id === selection.id);
-    if (!king) return null;
-    const dynasty = dynasties.find((d) => d.id === king.dynastyId);
-    body = (
-      <>
-        <Header
-          accent={dynasty?.color ?? "#888"}
-          eyebrow={dynasty ? `Ruler · ${dynasty.name}` : "Ruler"}
-          name={king.name}
-          nameFa={king.nameFa}
-          subtitle={formatRange(
-            king.startYear,
-            king.endYear,
-            king.startYearApprox,
-            king.endYearApprox,
+    if (king) {
+      const dynasty = dynasties.find((d) => d.id === king.dynastyId);
+      const accent = dynasty ? normalizeDynastyColor(dynasty.color) : color.inkDim;
+      const showBack = drill?.kingId === king.id && dynasty;
+      body = (
+        <>
+          {showBack && (
+            <button
+              className="back-link"
+              onClick={() => {
+                setSelection({ kind: "dynasty", id: dynasty!.id });
+                setDrill(null);
+              }}
+            >
+              ← Back to {dynasty!.name}
+            </button>
           )}
-        />
-        <Field label="Death" value={king.deathCause} />
-        <Facts facts={king.facts} />
-      </>
-    );
+          <Header
+            accent={accent}
+            eyebrow={dynasty ? `Ruler · ${dynasty.name}` : "Ruler"}
+            name={king.name}
+            nameFa={king.nameFa}
+            subtitle={formatRange(
+              king.startYear,
+              king.endYear,
+              king.startYearApprox,
+              king.endYearApprox,
+            )}
+          />
+          {dynasty && <ReignBar dynasty={dynasty} king={king} accent={accent} />}
+          <Field label="Death" value={king.deathCause} />
+          <Facts facts={king.facts} />
+        </>
+      );
+    }
   } else {
     const event = events.find((e) => e.id === selection.id);
-    if (!event) return null;
-    const meta = CATEGORY_META[event.category];
-    body = (
-      <>
-        <Header
-          accent={meta.color}
-          eyebrow={`Event · ${meta.label}`}
-          name={event.title}
-          nameFa={event.titleFa}
-          subtitle={formatYear(event.year, event.yearApprox)}
-        />
-        <Facts facts={[event.fact]} />
-      </>
-    );
+    if (event) {
+      const meta = CATEGORY_META[event.category];
+      body = (
+        <>
+          <Header
+            accent={meta.color}
+            eyebrow={`Event · ${meta.label}`}
+            name={event.title}
+            nameFa={event.titleFa}
+            subtitle={formatYear(event.year, event.yearApprox)}
+          />
+          <Facts facts={[event.fact]} />
+        </>
+      );
+    }
   }
 
   return (
     <div
+      ref={panelRef}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="false"
+      className={reducedMotion ? "detail-panel no-motion" : "detail-panel"}
       style={{
         position: "fixed",
         top: 0,
         right: 0,
         height: "100vh",
-        width: 360,
+        width: 380,
         maxWidth: "90vw",
-        background: "#fff",
-        boxShadow: "-4px 0 24px rgba(0,0,0,0.15)",
-        padding: "24px 24px 32px",
+        background: color.panelBg,
+        boxShadow: shadow.panel,
+        borderLeft: `1px solid ${color.line}`,
+        padding: "28px 24px 32px",
         boxSizing: "border-box",
         overflowY: "auto",
-        zIndex: 10,
+        outline: "none",
+        fontFamily: font.ui,
+        zIndex: z.panel,
       }}
     >
       <button
         onClick={() => setSelection(null)}
         aria-label="Close"
-        style={{
-          position: "absolute",
-          top: 16,
-          right: 16,
-          border: "none",
-          background: "transparent",
-          fontSize: 22,
-          lineHeight: 1,
-          cursor: "pointer",
-          color: "#999",
-        }}
+        className="panel-close"
       >
         ×
       </button>
       {body}
     </div>
   );
+};
+
+const DetailPanel = () => {
+  const [selection] = useAtom(selectionAtom);
+  if (!selection) return null;
+  return <PanelBody />;
 };
 
 export default DetailPanel;

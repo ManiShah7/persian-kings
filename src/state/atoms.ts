@@ -43,3 +43,17 @@ export type Selection =
   | { kind: "event"; id: string };
 
 export const selectionAtom = atom<Selection | null>(null);
+
+// --- Tooltip (hover card rendered in a portal) ---
+
+export type TooltipContent = {
+  title: string;
+  titleFa?: string;
+  lines: string[];
+};
+
+export const tooltipAtom = atom<{
+  content: TooltipContent;
+  x: number;
+  y: number;
+} | null>(null);

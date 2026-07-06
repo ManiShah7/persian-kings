@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { Dynasty } from "../types/Dynasty";
 import type { King } from "../types/King";
-import { ppsAtom, scrollXAtom, selectionAtom } from "../state/atoms";
+import { ppsAtom, scrollXAtom, selectionAtom, tooltipAtom } from "../state/atoms";
 import {
   DYNASTY_HEADER_HEIGHT,
   KING_NAME_MIN_WIDTH,
@@ -11,9 +11,10 @@ import {
   ROW_HEIGHT,
   laneY,
 } from "../utils/constants";
+import { color, font } from "../theme/tokens";
 import { yearToX } from "../utils/coords";
 import { clamp } from "../utils/clamp";
-import { shadeColor } from "../utils/color";
+import { contrastText, normalizeDynastyColor, shadeColor } from "../utils/color";
 import { formatRange } from "../utils/format";
 
 const CONTAINER_HEIGHT = ROW_HEIGHT - 4;
@@ -42,23 +43,28 @@ const fitHeaderLabel = (name: string, barWidth: number): string => {
   return name.slice(0, Math.max(1, maxChars - 1)) + "…";
 };
 
+const firstWords = (sentence: string, count: number): string => {
+  const words = sentence.split(/\s+/).slice(0, count);
+  return words.join(" ") + (sentence.split(/\s+/).length > count ? "…" : "");
+};
+
 type Props = { dynasty: Dynasty; kings: King[] };
 
 const DynastyBar = memo(({ dynasty, kings }: Props) => {
   const pps = useAtomValue(ppsAtom);
   const scrollX = useAtomValue(scrollXAtom);
   const setSelection = useSetAtom(selectionAtom);
+  const setTooltip = useSetAtom(tooltipAtom);
 
   const y = laneY(dynasty.row);
   const barX = yearToX(dynasty.startYear, pps);
   const barWidth = yearToX(dynasty.endYear, pps) - barX;
-  const color = dynasty.color;
+  const baseColor = normalizeDynastyColor(dynasty.color);
 
   const reignStripY = y + DYNASTY_HEADER_HEIGHT;
   const showSegments = pps >= KING_SEGMENTS_MIN_PPS;
 
-  // Sticky header label: pinned to the viewport-left edge but never escaping
-  // the bar's own span.
+  // Sticky header label pinned to the viewport-left edge, clamped to the bar.
   const labelWidth = dynasty.name.length * LABEL_CHAR_PX;
   const labelX = clamp(scrollX + 12, barX + 8, barX + barWidth - labelWidth - 8);
   const headerLabel = barWidth < 40 ? "" : fitHeaderLabel(dynasty.name, barWidth);
@@ -73,8 +79,11 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
         width={barWidth}
         height={CONTAINER_HEIGHT}
         rx={4}
-        fill={color}
+        fill={baseColor}
         fillOpacity={0.18}
+        stroke={dynasty.foreignRule ? baseColor : "none"}
+        strokeDasharray={dynasty.foreignRule ? "4 3" : undefined}
+        strokeWidth={dynasty.foreignRule ? 1 : undefined}
         onClick={selectDynasty}
         style={{ cursor: "pointer" }}
       />
@@ -84,17 +93,29 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
         width={barWidth}
         height={DYNASTY_HEADER_HEIGHT}
         rx={4}
-        fill={color}
+        fill={baseColor}
         onClick={selectDynasty}
         style={{ cursor: "pointer" }}
       />
+      {dynasty.foreignRule && (
+        <rect
+          x={barX}
+          y={y}
+          width={barWidth}
+          height={DYNASTY_HEADER_HEIGHT}
+          rx={4}
+          fill="url(#foreign-hatch)"
+          pointerEvents="none"
+        />
+      )}
 
       {showSegments &&
         kings.map((king, i) => {
           const kx = yearToX(king.startYear, pps);
           const kw = yearToX(king.endYear, pps) - kx - SEGMENT_GAP;
           if (kw <= 0) return null;
-          const fill = i % 2 === 0 ? shadeColor(color, 18) : shadeColor(color, -8);
+          const fill = i % 2 === 0 ? shadeColor(baseColor, 18) : shadeColor(baseColor, -8);
+          const textColor = contrastText(fill);
           const showName = kw >= KING_NAME_MIN_WIDTH;
           const showRange = kw >= KING_RANGE_MIN_WIDTH;
           const label = showName ? fitKingName(king.name, kw) : "";
@@ -104,16 +125,25 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
             king.startYearApprox,
             king.endYearApprox,
           );
+          const tooltip = {
+            content: {
+              title: king.name,
+              titleFa: king.nameFa,
+              lines: [`Reigned ${range}`, firstWords(king.deathCause, 6)],
+            },
+          };
           return (
             <g
               key={king.id}
+              style={{ cursor: "pointer" }}
               onClick={(e) => {
                 e.stopPropagation();
                 setSelection({ kind: "king", id: king.id });
               }}
-              style={{ cursor: "pointer" }}
+              onPointerEnter={(e) => setTooltip({ ...tooltip, x: e.clientX, y: e.clientY })}
+              onPointerMove={(e) => setTooltip({ ...tooltip, x: e.clientX, y: e.clientY })}
+              onPointerLeave={() => setTooltip(null)}
             >
-              <title>{`${king.name}, ${range}`}</title>
               <rect
                 className="king-segment"
                 x={kx}
@@ -128,7 +158,8 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
                   x={kx + 6}
                   y={reignStripY + (showRange ? REIGN_STRIP_HEIGHT / 2 - 4 : REIGN_STRIP_HEIGHT / 2)}
                   fontSize={11}
-                  fill="rgba(0,0,0,0.78)"
+                  fontFamily={font.ui}
+                  fill={textColor}
                   dominantBaseline="middle"
                   pointerEvents="none"
                 >
@@ -140,7 +171,9 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
                   x={kx + 6}
                   y={reignStripY + REIGN_STRIP_HEIGHT / 2 + 9}
                   fontSize={9}
-                  fill="rgba(0,0,0,0.6)"
+                  fontFamily={font.ui}
+                  fill={textColor}
+                  fillOpacity={0.75}
                   dominantBaseline="middle"
                   pointerEvents="none"
                 >
@@ -158,8 +191,9 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
           textAnchor="start"
           dominantBaseline="middle"
           fontSize={12}
+          fontFamily={font.ui}
           fontWeight={700}
-          fill="#fff"
+          fill={color.ink}
           pointerEvents="none"
         >
           {headerLabel}

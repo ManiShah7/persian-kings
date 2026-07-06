@@ -32,6 +32,9 @@ import type { EventCategory } from "../types/Event";
 export const EVENT_BAND_TOP = 720;
 export const EVENT_LANE_HEIGHT = 90;
 export const EVENT_STEM_HEIGHT = 14;
+export const EVENT_LABEL_MIN_PPS = 6; // show event labels at/above this zoom
+export const EVENT_CLUSTER_GAP = 16; // px: merge closer events into a cluster
+export const EVENT_CLUSTER_ZOOM = 2.5; // zoom multiplier when a cluster is clicked
 
 export const CATEGORY_ORDER: EventCategory[] = [
   "politics-wars",

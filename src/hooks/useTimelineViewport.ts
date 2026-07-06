@@ -43,6 +43,22 @@ export function useTimelineViewport() {
     [setScrollX],
   );
 
+  // Zoom to a target level (clamped) and center the viewport on `year`.
+  const zoomToYear = useCallback(
+    (year: number, targetPps: number) => {
+      const el = containerRef.current;
+      if (!el) return;
+      const content = el.firstElementChild as HTMLElement | null;
+      const newPps = clamp(targetPps, MIN_PPS, MAX_PPS);
+      if (content) content.style.width = `${timelineWidth(newPps)}px`;
+      el.scrollLeft = yearToX(year, newPps) - el.clientWidth / 2;
+      ppsRef.current = newPps;
+      setPps(newPps);
+      setScrollX(el.scrollLeft);
+    },
+    [setPps, setScrollX],
+  );
+
   // Zoom around a horizontal anchor point (px offset from the viewport left),
   // keeping the year under that point stationary.
   const applyZoom = useCallback(
@@ -213,5 +229,5 @@ export function useTimelineViewport() {
     return () => el.removeEventListener("keydown", onKeyDown);
   }, [applyZoom]);
 
-  return { containerRef };
+  return { containerRef, zoomToYear };
 }
