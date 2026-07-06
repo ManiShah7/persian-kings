@@ -77,6 +77,10 @@ The app works but is mid-refactor. Be aware:
 
 ## Roadmap (priority order)
 
+> **Detailed execution plan lives in `docs/plan/`** (README + one file per
+> phase). When implementing, follow those phase docs — they supersede the
+> summary below.
+
 1. **Render events** — wire `events.json` into the three category lanes; add an
    `Event` type.
 2. **Detail panel** — click a dynasty / king / event to open a panel with its facts,
