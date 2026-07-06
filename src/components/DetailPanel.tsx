@@ -1,17 +1,8 @@
 import { useAtom } from "jotai";
 import { selectionAtom } from "../state/atoms";
-import dynastiesData from "../data/dynasties.json";
-import kingsData from "../data/kings.json";
-import eventsData from "../data/events.json";
-import type { Dynasty } from "../types/Dynasty";
-import type { King } from "../types/King";
-import type { HistoricalEvent } from "../types/Event";
+import { dynasties, events, kings } from "../data";
 import { CATEGORY_META } from "../utils/constants";
 import { formatRange, formatYear } from "../utils/format";
-
-const dynasties = dynastiesData as Dynasty[];
-const kings = kingsData as King[];
-const events = eventsData as HistoricalEvent[];
 
 const Field = ({ label, value }: { label: string; value: string }) => (
   <div style={{ marginBottom: 10 }}>

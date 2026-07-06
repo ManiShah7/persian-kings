@@ -11,3 +11,11 @@ body {
   cursor: grabbing;
   user-select: none;
 }
+
+.king-segment {
+  transition: filter 120ms ease;
+}
+
+.king-segment:hover {
+  filter: brightness(1.18);
+}

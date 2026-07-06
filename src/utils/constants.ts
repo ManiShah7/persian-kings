@@ -20,6 +20,12 @@ export const timelineWidth = (pps: number): number => ALL_YEARS * pps;
 export const laneY = (row: number): number =>
   AXIS_HEIGHT + row * (ROW_HEIGHT + ROW_GAP);
 
+// Dynasty-bar anatomy + king level-of-detail thresholds.
+export const DYNASTY_HEADER_HEIGHT = 22; // solid header strip holding the name
+export const KING_SEGMENTS_MIN_PPS = 1.2; // show king segments at/above this zoom
+export const KING_NAME_MIN_WIDTH = 70; // segment px width to show the king name
+export const KING_RANGE_MIN_WIDTH = 130; // + reign range as well
+
 import type { EventCategory } from "../types/Event";
 
 export const EVENT_BAND_TOP = 720;

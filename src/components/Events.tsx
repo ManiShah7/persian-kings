@@ -1,4 +1,3 @@
-import eventsData from "../data/events.json";
 import type { HistoricalEvent } from "../types/Event";
 import {
   CATEGORY_META,
@@ -11,8 +10,7 @@ import {
 import { yearToX } from "../utils/coords";
 import { useAtomValue, useSetAtom } from "jotai";
 import { ppsAtom, selectionAtom, visibleRangeAtom } from "../state/atoms";
-
-const events = eventsData as HistoricalEvent[];
+import { events } from "../data";
 
 const laneY = (category: HistoricalEvent["category"]) =>
   EVENT_BAND_TOP + CATEGORY_ORDER.indexOf(category) * EVENT_LANE_HEIGHT;
