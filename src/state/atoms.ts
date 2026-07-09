@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import { xToYear } from "../utils/coords";
-import { DEFAULT_PPS } from "../utils/constants";
+import { ALL_YEARS, DEFAULT_PPS, MAX_YEAR, MIN_YEAR, timelineWidth } from "../utils/constants";
+import { clamp } from "../utils/clamp";
 import { eraForYear } from "../data/eras";
 
 // --- Viewport (single source of truth for scroll/pan/zoom) ---
@@ -11,11 +12,11 @@ export const viewportWidthAtom = atom<number>(
   typeof window === "undefined" ? 1200 : window.innerWidth,
 );
 
-// The timeline is padded with a leading + trailing gutter of half a viewport
-// each, so the first and last years can be scrolled all the way to the centre.
-// With that gutter the SVG's x=0 sits half a viewport in, which makes the
-// centre year exactly xToYear(scrollLeft): scrollLeft 0 → MIN_YEAR, scrollLeft
-// timelineWidth → MAX_YEAR.
+// The scroll-content is exactly the timeline width — no gutters. The first and
+// last years sit flush against the viewport's left/right edges (you can't
+// scroll past them). The SVG's x=0 aligns with the content's left edge, so the
+// viewport's left edge is at SVG-x = scrollLeft and its centre at SVG-x =
+// scrollLeft + viewportWidth/2.
 
 // Derived — the year range currently on screen, padded by ~1 viewport on each
 // side so elements mount slightly before they scroll into view.
@@ -23,20 +24,31 @@ export const visibleRangeAtom = atom((get) => {
   const pps = get(ppsAtom);
   const x = get(scrollXAtom);
   const w = get(viewportWidthAtom);
-  // SVG-x at the viewport's left edge is scrollLeft minus the half-viewport
-  // gutter; pad by one viewport on each side.
-  const leftSvgX = x - w / 2;
+  // The viewport spans SVG-x [x, x + w]; pad by one viewport on each side.
   return {
-    startYear: xToYear(leftSvgX - w, pps),
-    endYear: xToYear(leftSvgX + 2 * w, pps),
+    startYear: xToYear(x - w, pps),
+    endYear: xToYear(x + 2 * w, pps),
   };
 });
 
-// Derived — the year at the horizontal center of the screen. Drives the era
-// background + header HUD. Year 0 doesn't exist historically → map it to -1.
+// Derived — the "playhead" year that drives the header HUD + era background.
+// Without gutters the geometric viewport centre can't reach the first/last
+// years (they sit flush at the edges), so instead we report scroll *progress*
+// across the whole span: scrollLeft 0 → MIN_YEAR, scrollLeft max → MAX_YEAR.
+// This meets the geometric centre exactly at the midpoint and lets the readout
+// span end to end. Falls back to the clamped centre when the timeline fully
+// fits on screen (nothing to scroll). Year 0 is unhistorical → map it to -1.
 export const centerYearAtom = atom((get) => {
-  const year = Math.round(xToYear(get(scrollXAtom), get(ppsAtom)));
-  return year === 0 ? -1 : year;
+  const pps = get(ppsAtom);
+  const x = get(scrollXAtom);
+  const w = get(viewportWidthAtom);
+  const maxScroll = timelineWidth(pps) - w;
+  const year =
+    maxScroll > 0
+      ? MIN_YEAR + clamp(x / maxScroll, 0, 1) * ALL_YEARS
+      : clamp(xToYear(x + w / 2, pps), MIN_YEAR, MAX_YEAR);
+  const rounded = Math.round(year);
+  return rounded === 0 ? -1 : rounded;
 });
 
 // Derived — the era containing the centered year.

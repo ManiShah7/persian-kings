@@ -29,8 +29,13 @@ const HeaderHUD = () => {
       }}
     >
       <div
+        className="hud-title"
         style={{
           flex: 1,
+          minWidth: 0,
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
           fontFamily: font.latin,
           fontSize: text.md,
           letterSpacing: "0.2em",

@@ -29,12 +29,13 @@ export const KING_RANGE_MIN_WIDTH = 130; // + reign range as well
 
 import type { EventCategory } from "../types/Event";
 
-export const EVENT_BAND_TOP = 720;
+export const EVENT_BAND_TOP = 460;
 export const EVENT_LANE_HEIGHT = 90;
 export const EVENT_STEM_HEIGHT = 14;
 export const EVENT_LABEL_MIN_PPS = 6; // show event labels at/above this zoom
 export const EVENT_CLUSTER_GAP = 16; // px: merge closer events into a cluster
 export const EVENT_CLUSTER_ZOOM = 2.5; // zoom multiplier when a cluster is clicked
+export const EVENT_FAN_STEP = 20; // px between same-year events that can't be zoomed apart
 
 export const CATEGORY_ORDER: EventCategory[] = [
   "politics-wars",

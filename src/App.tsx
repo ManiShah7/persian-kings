@@ -6,17 +6,21 @@ import DetailPanel from "./components/DetailPanel";
 import EraBackground from "./components/EraBackground";
 import EventAtmosphere from "./components/EventAtmosphere";
 import HeaderHUD from "./components/HeaderHUD";
+import SeekBar from "./components/SeekBar";
+import ZoomControls from "./components/ZoomControls";
 import Tooltip from "./components/Tooltip";
-import { ppsAtom, viewportWidthAtom } from "./state/atoms";
+import { ppsAtom } from "./state/atoms";
 import { useTimelineViewport } from "./hooks/useTimelineViewport";
 import { ViewportContext } from "./state/viewportContext";
 import { HUD_HEIGHT, TIMELINE_HEIGHT, timelineWidth } from "./utils/constants";
 
 function App() {
-  const { containerRef, zoomToYear } = useTimelineViewport();
+  const { containerRef, zoomToYear, panToYear, zoomBy } = useTimelineViewport();
   const pps = useAtomValue(ppsAtom);
-  const viewportWidth = useAtomValue(viewportWidthAtom);
-  const viewportApi = useMemo(() => ({ zoomToYear }), [zoomToYear]);
+  const viewportApi = useMemo(
+    () => ({ zoomToYear, panToYear, zoomBy }),
+    [zoomToYear, panToYear, zoomBy],
+  );
 
   return (
     <ViewportContext.Provider value={viewportApi}>
@@ -36,7 +40,7 @@ function App() {
           className="scroll-content"
           style={{
             position: "relative",
-            width: timelineWidth(pps) + viewportWidth,
+            width: timelineWidth(pps),
             height: TIMELINE_HEIGHT,
             paddingTop: HUD_HEIGHT,
           }}
@@ -46,6 +50,8 @@ function App() {
         </div>
       </div>
 
+      <SeekBar />
+      <ZoomControls />
       <DetailPanel />
       <Tooltip />
     </ViewportContext.Provider>

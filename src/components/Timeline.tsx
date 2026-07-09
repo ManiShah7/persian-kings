@@ -7,20 +7,25 @@ import {
   timelineWidth,
 } from "../utils/constants";
 import { useAtomValue } from "jotai";
-import { ppsAtom, scrollXAtom, viewportWidthAtom, visibleRangeAtom } from "../state/atoms";
+import { ppsAtom, scrollXAtom, visibleRangeAtom } from "../state/atoms";
 import { dynasties, kingsByDynasty } from "../data";
 import { color, font, radius, text } from "../theme/tokens";
+import { clamp } from "../utils/clamp";
 import DynastyBar from "./DynastyBar";
 import Events from "./Events";
+
+const CATEGORY_CHIP_WIDTH = 158;
 
 const Timeline = () => {
   const pps = useAtomValue(ppsAtom);
   const scrollX = useAtomValue(scrollXAtom);
-  const gutter = useAtomValue(viewportWidthAtom) / 2;
   const { startYear, endYear } = useAtomValue(visibleRangeAtom);
   const width = timelineWidth(pps);
-  // SVG-internal x that currently sits at the viewport's left edge.
-  const viewportLeftX = scrollX - gutter;
+  // SVG-internal x at the viewport's left edge (no gutter → equals scrollLeft).
+  const viewportLeftX = scrollX;
+  // Pin the category legend to the viewport-left edge, but keep it inside the
+  // SVG's clip box so it never scrolls off the near/far edge of the timeline.
+  const legendX = clamp(viewportLeftX + 12, 12, width - CATEGORY_CHIP_WIDTH - 12);
 
   const visibleDynasties = dynasties.filter(
     (d) => d.endYear >= startYear && d.startYear <= endYear,
@@ -30,7 +35,7 @@ const Timeline = () => {
     <svg
       width={width}
       height={TIMELINE_HEIGHT}
-      style={{ display: "block", marginLeft: gutter }}
+      style={{ display: "block" }}
     >
       <defs>
         {/* Foreign-rule marker: shared diagonal hatch overlaid on the header. */}
@@ -59,11 +64,11 @@ const Timeline = () => {
       {CATEGORY_ORDER.map((category, i) => {
         const y = EVENT_BAND_TOP + i * EVENT_LANE_HEIGHT;
         return (
-          <g key={category} transform={`translate(${viewportLeftX + 12},0)`}>
+          <g key={category} transform={`translate(${legendX},0)`}>
             <rect
               x={0}
               y={y - 13}
-              width={158}
+              width={CATEGORY_CHIP_WIDTH}
               height={24}
               rx={radius.md}
               fill={color.panelBg}

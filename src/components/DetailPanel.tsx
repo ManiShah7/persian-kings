@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { useAtom } from "jotai";
-import { selectionAtom } from "../state/atoms";
+import { useAtom, useAtomValue } from "jotai";
+import { selectionAtom, viewportWidthAtom } from "../state/atoms";
 import { dynasties, events, kings } from "../data";
 import type { Dynasty } from "../types/Dynasty";
 import type { King } from "../types/King";
@@ -125,6 +125,7 @@ const ReignBar = ({
 
 const PanelBody = () => {
   const [selection, setSelection] = useAtom(selectionAtom);
+  const viewportWidth = useAtomValue(viewportWidthAtom);
   const panelRef = useRef<HTMLDivElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const reducedMotion = usePrefersReducedMotion();
@@ -274,8 +275,8 @@ const PanelBody = () => {
         top: 0,
         right: 0,
         height: "100vh",
-        width: 380,
-        maxWidth: "90vw",
+        width: viewportWidth <= 560 ? "100vw" : 380,
+        maxWidth: "100vw",
         background: color.panelBg,
         boxShadow: shadow.panel,
         borderLeft: `1px solid ${color.line}`,

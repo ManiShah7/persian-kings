@@ -21,4 +21,4 @@ export const radius = { sm: 3, md: 6, lg: 10 };
 
 export const shadow = { panel: "-8px 0 32px rgba(0,0,0,0.5)" };
 
-export const z = { background: -1, timeline: 0, hud: 20, panel: 30 };
+export const z = { background: -1, timeline: 0, seek: 15, hud: 20, panel: 30 };

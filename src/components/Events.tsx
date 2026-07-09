@@ -5,6 +5,7 @@ import {
   EVENT_BAND_TOP,
   EVENT_CLUSTER_GAP,
   EVENT_CLUSTER_ZOOM,
+  EVENT_FAN_STEP,
   EVENT_LABEL_MIN_PPS,
   EVENT_LANE_HEIGHT,
   EVENT_STEM_HEIGHT,
@@ -61,90 +62,95 @@ const Events = () => {
         const dotY = y - EVENT_STEM_HEIGHT;
         const cat = CATEGORY_META[category];
 
+        const renderMarker = (event: HistoricalEvent, x: number, showLabel: boolean) => {
+          const selectEvent = () => setSelection({ kind: "event", id: event.id });
+          const tip = {
+            content: { title: event.title, titleFa: event.titleFa, lines: eventLines(event) },
+          };
+          return (
+            <g
+              key={event.id}
+              className="timeline-focusable"
+              tabIndex={0}
+              role="button"
+              aria-label={`${event.title}, ${formatYear(event.year, event.yearApprox)}, ${cat.label}`}
+              style={{ cursor: "pointer" }}
+              onClick={selectEvent}
+              onKeyDown={onActivate(selectEvent)}
+              onPointerEnter={(e) => setTooltip({ ...tip, x: e.clientX, y: e.clientY })}
+              onPointerMove={(e) => setTooltip({ ...tip, x: e.clientX, y: e.clientY })}
+              onPointerLeave={() => setTooltip(null)}
+            >
+              <line x1={x} x2={x} y1={y} y2={dotY} stroke={cat.color} />
+              <circle cx={x} cy={dotY} r={4} fill={cat.color} />
+              <circle cx={x} cy={dotY} r={10} fill="transparent" />
+              {showLabel && (
+                <text
+                  x={x}
+                  y={dotY - 8}
+                  textAnchor="middle"
+                  fontSize={text.xs}
+                  fontFamily={font.ui}
+                  fill={color.inkDim}
+                  pointerEvents="none"
+                >
+                  {event.title}
+                </text>
+              )}
+            </g>
+          );
+        };
+
         return (
           <g key={`events-${category}`}>
             {clusters.map((cluster) => {
               if (cluster.events.length > 1) {
-                const zoomToCluster = () =>
-                  viewport?.zoomToYear(cluster.year, Math.min(pps * EVENT_CLUSTER_ZOOM, MAX_PPS));
-                return (
-                  <g
-                    key={`cluster-${category}-${cluster.year}`}
-                    className="timeline-focusable"
-                    tabIndex={0}
-                    role="button"
-                    aria-label={`${cluster.events.length} ${cat.label} events near ${formatYear(
-                      cluster.year,
-                    )}, activate to zoom in`}
-                    style={{ cursor: "zoom-in" }}
-                    onClick={zoomToCluster}
-                    onKeyDown={onActivate(zoomToCluster)}
-                  >
-                    <circle cx={cluster.x} cy={dotY} r={9} fill={cat.color} />
-                    <text
-                      x={cluster.x}
-                      y={dotY}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fontSize={9}
-                      fontFamily={font.ui}
-                      fontWeight={700}
-                      fill="#fff"
-                      pointerEvents="none"
+                const sameYear =
+                  cluster.events[0].year === cluster.events[cluster.events.length - 1].year;
+                if (!sameYear) {
+                  const zoomToCluster = () =>
+                    viewport?.zoomToYear(cluster.year, Math.min(pps * EVENT_CLUSTER_ZOOM, MAX_PPS));
+                  return (
+                    <g
+                      key={`cluster-${category}-${cluster.year}`}
+                      className="timeline-focusable"
+                      tabIndex={0}
+                      role="button"
+                      aria-label={`${cluster.events.length} ${cat.label} events near ${formatYear(
+                        cluster.year,
+                      )}, activate to zoom in`}
+                      style={{ cursor: "zoom-in" }}
+                      onClick={zoomToCluster}
+                      onKeyDown={onActivate(zoomToCluster)}
                     >
-                      {cluster.events.length}
-                    </text>
+                      <circle cx={cluster.x} cy={dotY} r={9} fill={cat.color} />
+                      <text
+                        x={cluster.x}
+                        y={dotY}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={9}
+                        fontFamily={font.ui}
+                        fontWeight={700}
+                        fill="#fff"
+                        pointerEvents="none"
+                      >
+                        {cluster.events.length}
+                      </text>
+                    </g>
+                  );
+                }
+                const n = cluster.events.length;
+                return (
+                  <g key={`fan-${category}-${cluster.year}`}>
+                    {cluster.events.map((event, i) =>
+                      renderMarker(event, cluster.x + (i - (n - 1) / 2) * EVENT_FAN_STEP, false),
+                    )}
                   </g>
                 );
               }
 
-              const event = cluster.events[0];
-              const x = cluster.x;
-              const selectEvent = () => setSelection({ kind: "event", id: event.id });
-              return (
-                <g
-                  key={event.id}
-                  className="timeline-focusable"
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${event.title}, ${formatYear(event.year, event.yearApprox)}, ${cat.label}`}
-                  style={{ cursor: "pointer" }}
-                  onClick={selectEvent}
-                  onKeyDown={onActivate(selectEvent)}
-                  onPointerEnter={(e) =>
-                    setTooltip({
-                      content: { title: event.title, titleFa: event.titleFa, lines: eventLines(event) },
-                      x: e.clientX,
-                      y: e.clientY,
-                    })
-                  }
-                  onPointerMove={(e) =>
-                    setTooltip({
-                      content: { title: event.title, titleFa: event.titleFa, lines: eventLines(event) },
-                      x: e.clientX,
-                      y: e.clientY,
-                    })
-                  }
-                  onPointerLeave={() => setTooltip(null)}
-                >
-                  <line x1={x} x2={x} y1={y} y2={dotY} stroke={cat.color} />
-                  <circle cx={x} cy={dotY} r={4} fill={cat.color} />
-                  <circle cx={x} cy={dotY} r={10} fill="transparent" />
-                  {showLabels && (
-                    <text
-                      x={x}
-                      y={dotY - 8}
-                      textAnchor="middle"
-                      fontSize={text.xs}
-                      fontFamily={font.ui}
-                      fill={color.inkDim}
-                      pointerEvents="none"
-                    >
-                      {event.title}
-                    </text>
-                  )}
-                </g>
-              );
+              return renderMarker(cluster.events[0], cluster.x, showLabels);
             })}
           </g>
         );

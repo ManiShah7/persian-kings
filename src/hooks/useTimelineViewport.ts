@@ -7,7 +7,7 @@ import {
   selectionAtom,
   viewportWidthAtom,
 } from "../state/atoms";
-import { MAX_PPS, MIN_PPS, timelineWidth } from "../utils/constants";
+import { ALL_YEARS, MAX_PPS, MIN_PPS, MIN_YEAR, timelineWidth } from "../utils/constants";
 import { xToYear, yearToX } from "../utils/coords";
 import { clamp } from "../utils/clamp";
 import { parseViewParams, serializeViewParams } from "../utils/urlState";
@@ -17,10 +17,9 @@ const DRAG_THRESHOLD = 4; // px before a pointer press counts as a drag
 const KEYBOARD_ZOOM_FACTOR = 1.2;
 const URL_WRITE_DEBOUNCE_MS = 300;
 
-// Total scroll-content width: the timeline plus a half-viewport gutter on each
-// side (2 × half = one viewport) so the extreme years can be centered.
-const contentWidth = (pps: number, viewportWidth: number): string =>
-  `${timelineWidth(pps) + viewportWidth}px`;
+// Scroll-content width: exactly the timeline width, no gutters — the first and
+// last years sit flush against the viewport edges.
+const contentWidth = (pps: number): string => `${timelineWidth(pps)}px`;
 
 /**
  * Owns every wiring concern of the native scroll viewport: scroll→atom,
@@ -53,10 +52,13 @@ export function useTimelineViewport() {
     const params = parseViewParams(window.location.search);
     const initPps = params.pps ?? ppsRef.current;
     const content = el.firstElementChild as HTMLElement | null;
-    if (content) content.style.width = contentWidth(initPps, el.clientWidth);
+    if (content) content.style.width = contentWidth(initPps);
     if (params.year !== undefined) {
-      // Gutter makes scrollLeft = yearToX(year) center that year.
-      el.scrollLeft = yearToX(params.year, initPps);
+      // Invert centerYearAtom's progress mapping so a copied link restores the
+      // exact scroll position it was captured at.
+      const maxScroll = timelineWidth(initPps) - el.clientWidth;
+      el.scrollLeft =
+        maxScroll > 0 ? clamp((params.year - MIN_YEAR) / ALL_YEARS, 0, 1) * maxScroll : 0;
     }
     if (params.pps !== undefined) {
       ppsRef.current = initPps;
@@ -90,13 +92,24 @@ export function useTimelineViewport() {
       if (!el) return;
       const content = el.firstElementChild as HTMLElement | null;
       const newPps = clamp(targetPps, MIN_PPS, MAX_PPS);
-      if (content) content.style.width = contentWidth(newPps, el.clientWidth);
-      el.scrollLeft = yearToX(year, newPps);
+      if (content) content.style.width = contentWidth(newPps);
+      el.scrollLeft = yearToX(year, newPps) - el.clientWidth / 2;
       ppsRef.current = newPps;
       setPps(newPps);
       setScrollX(el.scrollLeft);
     },
     [setPps, setScrollX],
+  );
+
+  // Pan (keeping the current zoom) so `year` sits at the viewport center.
+  const panToYear = useCallback(
+    (year: number) => {
+      const el = containerRef.current;
+      if (!el) return;
+      el.scrollLeft = yearToX(year, ppsRef.current) - el.clientWidth / 2;
+      setScrollX(el.scrollLeft);
+    },
+    [setScrollX],
   );
 
   // Zoom around a horizontal anchor point (px offset from the viewport left),
@@ -110,18 +123,28 @@ export function useTimelineViewport() {
       const newPps = clamp(oldPps * factor, MIN_PPS, MAX_PPS);
       if (newPps === oldPps) return;
 
-      const gutter = el.clientWidth / 2;
-      const anchorYear = xToYear(el.scrollLeft + pointerOffsetX - gutter, oldPps);
+      // Year currently under the pointer (SVG-x = scrollLeft + pointerOffsetX).
+      const anchorYear = xToYear(el.scrollLeft + pointerOffsetX, oldPps);
       // Widen/narrow the content *before* assigning scrollLeft, else the
       // browser clamps the new scrollLeft against the old (stale) width.
-      if (content) content.style.width = contentWidth(newPps, el.clientWidth);
-      el.scrollLeft = gutter + yearToX(anchorYear, newPps) - pointerOffsetX;
+      if (content) content.style.width = contentWidth(newPps);
+      el.scrollLeft = yearToX(anchorYear, newPps) - pointerOffsetX;
 
       ppsRef.current = newPps;
       setPps(newPps);
       setScrollX(el.scrollLeft);
     },
     [setPps, setScrollX],
+  );
+
+  // Zoom by a factor around the viewport center (for on-screen +/- buttons).
+  const zoomBy = useCallback(
+    (factor: number) => {
+      const el = containerRef.current;
+      if (!el) return;
+      applyZoom(factor, el.clientWidth / 2);
+    },
+    [applyZoom],
   );
 
   // Scroll → atom (rAF-throttled), and initialize from the container.
@@ -170,7 +193,41 @@ export function useTimelineViewport() {
     return () => el.removeEventListener("wheel", onWheel);
   }, [applyZoom]);
 
-  // Drag-to-pan.
+  // Pinch-to-zoom (touch). Single-finger panning is left to native scrolling.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let lastDist = 0;
+    const distance = (t: TouchList) =>
+      Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) lastDist = distance(e.touches);
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length !== 2 || lastDist === 0) return;
+      e.preventDefault();
+      const d = distance(e.touches);
+      const midX =
+        (e.touches[0].clientX + e.touches[1].clientX) / 2 - el.getBoundingClientRect().left;
+      applyZoom(d / lastDist, midX);
+      lastDist = d;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) lastDist = 0;
+    };
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    el.addEventListener("touchend", onTouchEnd);
+    el.addEventListener("touchcancel", onTouchEnd);
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+    };
+  }, [applyZoom]);
+
+  // Drag-to-pan (mouse only; touch pans via native scroll).
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -181,7 +238,7 @@ export function useTimelineViewport() {
     let suppressClick = false;
 
     const onPointerDown = (e: PointerEvent) => {
-      if (e.button !== 0) return;
+      if (e.button !== 0 || e.pointerType !== "mouse") return;
       active = true;
       moved = false;
       suppressClick = false;
@@ -280,5 +337,5 @@ export function useTimelineViewport() {
     return () => clearTimeout(t);
   }, [centerYear, pps, selection]);
 
-  return { containerRef, zoomToYear };
+  return { containerRef, zoomToYear, panToYear, zoomBy };
 }

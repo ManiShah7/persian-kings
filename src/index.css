@@ -54,6 +54,7 @@ body {
 
 .scroll-container {
   cursor: grab;
+  touch-action: pan-x;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
 }
@@ -81,6 +82,58 @@ body {
 .scroll-container::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
   background-clip: padding-box;
+}
+
+@media (max-width: 560px) {
+  .hud-title {
+    visibility: hidden;
+  }
+}
+
+/* --- Zoom controls --- */
+
+.zoom-cluster {
+  position: fixed;
+  right: 16px;
+  bottom: 62px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(10, 10, 12, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.zoom-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.zoom-btn + .zoom-btn {
+  border-top: 1px solid var(--line);
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.zoom-btn:disabled {
+  color: var(--ink-dim);
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* --- King segments --- */

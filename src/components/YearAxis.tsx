@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { ppsAtom, viewportWidthAtom, visibleRangeAtom } from "../state/atoms";
+import { ppsAtom, visibleRangeAtom } from "../state/atoms";
 import { AXIS_HEIGHT, HUD_HEIGHT, MAX_YEAR, MIN_YEAR, timelineWidth } from "../utils/constants";
 import { yearToX } from "../utils/coords";
 import { formatYear } from "../utils/format";
@@ -7,7 +7,6 @@ import { chooseTickStep } from "../utils/ticks";
 
 const YearAxis = () => {
   const pps = useAtomValue(ppsAtom);
-  const gutter = useAtomValue(viewportWidthAtom) / 2;
   const { startYear, endYear } = useAtomValue(visibleRangeAtom);
   const step = chooseTickStep(pps);
   const width = timelineWidth(pps);
@@ -22,7 +21,7 @@ const YearAxis = () => {
       className="year-axis"
       width={width}
       height={AXIS_HEIGHT}
-      style={{ position: "absolute", top: HUD_HEIGHT, left: gutter }}
+      style={{ position: "absolute", top: HUD_HEIGHT, left: 0 }}
     >
       <line
         x1={0}

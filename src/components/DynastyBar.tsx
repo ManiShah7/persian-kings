@@ -7,7 +7,6 @@ import {
   scrollXAtom,
   selectionAtom,
   tooltipAtom,
-  viewportWidthAtom,
 } from "../state/atoms";
 import {
   DYNASTY_HEADER_HEIGHT,
@@ -60,7 +59,6 @@ type Props = { dynasty: Dynasty; kings: King[] };
 const DynastyBar = memo(({ dynasty, kings }: Props) => {
   const pps = useAtomValue(ppsAtom);
   const scrollX = useAtomValue(scrollXAtom);
-  const gutter = useAtomValue(viewportWidthAtom) / 2;
   const setSelection = useSetAtom(selectionAtom);
   const setTooltip = useSetAtom(tooltipAtom);
 
@@ -73,12 +71,12 @@ const DynastyBar = memo(({ dynasty, kings }: Props) => {
   const showSegments = pps >= KING_SEGMENTS_MIN_PPS;
 
   // Sticky header label pinned to the viewport-left edge, clamped to the bar.
-  // scrollX - gutter is the SVG-internal x sitting at the viewport's left edge.
+  // With no gutter, scrollX is the SVG-internal x at the viewport's left edge.
   const headerLabel = barWidth < 40 ? "" : fitHeaderLabel(dynasty.name, barWidth);
   // Width of the *rendered* (possibly truncated) label, so the right-hand clamp
   // bound never crosses the left one and shoves the label off its bar.
   const labelWidth = headerLabel.length * LABEL_CHAR_PX;
-  const labelX = clamp(scrollX - gutter + 12, barX + 8, barX + barWidth - labelWidth - 8);
+  const labelX = clamp(scrollX + 12, barX + 8, barX + barWidth - labelWidth - 8);
 
   const selectDynasty = () => setSelection({ kind: "dynasty", id: dynasty.id });
 

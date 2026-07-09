@@ -1,5 +1,5 @@
 import { useAtomValue } from "jotai";
-import { ppsAtom, scrollXAtom } from "../state/atoms";
+import { ppsAtom, scrollXAtom, viewportWidthAtom } from "../state/atoms";
 import { events } from "../data";
 import { CATEGORY_META } from "../utils/constants";
 import { yearToX } from "../utils/coords";
@@ -18,13 +18,16 @@ const PEAK_ALPHA = 0.3;
 const EventAtmosphere = () => {
   const pps = useAtomValue(ppsAtom);
   const scrollX = useAtomValue(scrollXAtom);
+  const viewportWidth = useAtomValue(viewportWidthAtom);
+  const centerX = scrollX + viewportWidth / 2;
 
   const layers: string[] = [];
   for (const event of events) {
-    // The screen center sits at SVG-x = scrollX (see centerYearAtom); measure
-    // each event's px offset from it through coords, un-rounded, so the bloom
-    // tracks scroll smoothly rather than snapping in whole-year steps.
-    const dx = yearToX(event.year, pps) - scrollX;
+    // The screen center sits at SVG-x = scrollX + viewportWidth/2 (see
+    // centerYearAtom); measure each event's px offset from it through coords,
+    // un-rounded, so the bloom tracks scroll smoothly rather than snapping in
+    // whole-year steps.
+    const dx = yearToX(event.year, pps) - centerX;
     if (Math.abs(dx) >= GLOW_PX) continue;
     const intensity = 1 - Math.abs(dx) / GLOW_PX;
     const tint = withAlpha(CATEGORY_META[event.category].color, PEAK_ALPHA * intensity);
