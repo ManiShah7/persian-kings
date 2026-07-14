@@ -6,6 +6,7 @@ import DetailPanel from "./components/DetailPanel";
 import EraBackground from "./components/EraBackground";
 import { EraMotif } from "./components/EraMotif";
 import EventAtmosphere from "./components/EventAtmosphere";
+import { SceneDepth } from "./components/SceneDepth";
 import HeaderHUD from "./components/HeaderHUD";
 import SeekBar from "./components/SeekBar";
 import ZoomControls from "./components/ZoomControls";
@@ -28,6 +29,7 @@ function App() {
       <EraBackground />
       <EraMotif />
       <EventAtmosphere />
+      <SceneDepth />
       <HeaderHUD />
 
       <div
