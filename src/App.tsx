@@ -4,6 +4,7 @@ import Timeline from "./components/Timeline";
 import YearAxis from "./components/YearAxis";
 import DetailPanel from "./components/DetailPanel";
 import EraBackground from "./components/EraBackground";
+import { EraMotif } from "./components/EraMotif";
 import EventAtmosphere from "./components/EventAtmosphere";
 import HeaderHUD from "./components/HeaderHUD";
 import SeekBar from "./components/SeekBar";
@@ -25,6 +26,7 @@ function App() {
   return (
     <ViewportContext.Provider value={viewportApi}>
       <EraBackground />
+      <EraMotif />
       <EventAtmosphere />
       <HeaderHUD />
 

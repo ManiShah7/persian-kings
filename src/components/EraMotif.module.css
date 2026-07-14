@@ -1,0 +1,20 @@
+.root {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Matches EraBackground (z.background). Painted above it via DOM order in
+     App; the timeline at z.timeline (0) sits above. */
+  z-index: -1;
+}
+
+.layer {
+  transition: opacity 700ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    transition: none;
+  }
+}
